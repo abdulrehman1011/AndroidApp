@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.app.lyceum.american.americanlyceumapp">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:name="com.app.activities.MyApplication"
+        android:allowBackup="false"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        tools:replace="allowBackup,supportsRtl"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.app.activities.IntroActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.app.activities.LoginActivity"
+            android:theme="@style/AppTheme1" />
+        <activity
+            android:name="com.app.activities.HomeActivity"
+            android:theme="@style/AppTheme1" />
+        <activity
+            android:name="com.app.activities.StudentActivity"
+            android:theme="@style/AppTheme1" />
+        <activity
+            android:name="com.app.activities.ProfileActivity"
+            android:theme="@style/AppTheme1" />
+        <activity
+            android:name="com.app.activities.AttendanceActivity"
+            android:theme="@style/AppTheme1" />
+        <activity
+            android:name="com.app.activities.ExamActivity"
+            android:theme="@style/AppTheme1" />
+        <activity
+            android:name="com.app.activities.FeeActivity"
+            android:theme="@style/AppTheme1" />
+        <activity
+            android:name="com.app.activities.FeeDetailActivity"
+            android:theme="@style/AppTheme1"
+            android:exported="true"/>
+        <activity
+            android:name="com.app.activities.ExamDetailActivity"
+            android:theme="@style/AppTheme1" />
+        <activity
+            android:name="com.app.activities.StudentDetailsActivity"
+            android:theme="@style/AppTheme1" />
+        <activity android:theme="@style/AppTheme1" android:name="com.app.activities.NotificationActivity" />
+
+        <service
+            android:name="com.app.notifications.MyNotificationExtenderService"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE">
+            <intent-filter>
+                <action android:name="com.onesignal.NotificationExtender" />
+            </intent-filter>
+        </service>
+
+        <activity android:name="com.app.activities.BaseActivity" />
+        <activity
+            android:name="com.app.activities.Home2Activity"
+            android:label="@string/header_home"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+    </application>
+
+</manifest>

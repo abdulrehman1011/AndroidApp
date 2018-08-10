@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view" >
+
+    <group android:checkableBehavior="single"   >
+        <item
+            android:id="@+id/nav_school_details"
+            android:icon="@drawable/school_details_icon"
+
+            android:title="School Details" />
+        <item
+            android:id="@+id/nav_notifications"
+            android:icon="@drawable/notifications_icon"
+
+            android:title="Notification" />
+
+        <item
+            android:id="@+id/nav_rateus"
+            android:icon="@drawable/rate_us"
+            android:title="Rate Us" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/side_log_out"
+            android:title="Logout" />
+        <item
+            android:id="@+id/nav_student_gallery"
+            android:icon="@drawable/student_gallery_icon"
+            android:visible="false"
+            android:title="Students Gallery" />
+    </group>
+
+
+
+</menu>

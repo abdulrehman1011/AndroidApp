@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:clickable="false"
+    android:gravity="center"
+    android:layout_marginVertical="@dimen/small_margin"
+    android:layout_gravity="center_horizontal"
+    android:descendantFocusability="blocksDescendants">
+
+<FrameLayout
+    android:layout_width="wrap_content"
+    android:layout_centerVertical="true"
+    android:gravity="center"
+    android:layout_marginVertical="@dimen/small_margin"
+    android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/button"/>
+        <TextView
+            android:id="@+id/list_item_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginLeft="@dimen/medium_margin"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_gravity="center_vertical"
+            android:text="Abdul Rehman"/>
+</FrameLayout>
+        <!--<Button
+            android:id="@+id/list_item_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Abdul Rehman"
+            android:textAlignment="gravity"
+            android:paddingRight="@dimen/large_margin"
+            android:background="@drawable/button"
+            android:layout_gravity="center_vertical"
+            android:clickable="false"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />-->
+
+
+</RelativeLayout>

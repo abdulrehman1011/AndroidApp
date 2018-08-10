@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"  >
+
+    <item
+        android:id="@+id/cmCall"
+        android:icon="@drawable/call_icon"
+
+        android:title="Call" />
+
+    <item
+        android:id="@+id/cmHome"
+        android:icon="@drawable/home_icon"
+
+        android:title="Home" />
+    <item
+        android:id="@+id/cmLogout"
+        android:icon="@drawable/log_out"
+        android:title="Logout" />
+    <item
+        android:id="@+id/cmEmail"
+        android:icon="@drawable/email_icon"
+        android:visible="false"
+        android:title="Email" />
+</menu>

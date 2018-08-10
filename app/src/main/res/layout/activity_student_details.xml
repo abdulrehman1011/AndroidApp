@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.app.activities.StudentDetailsActivity">
+    <include
+        android:id="@+id/include"
+        layout="@layout/header" />
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/small_margin"
+        android:layout_marginTop="@dimen/logo_margin_top"
+        android:src="@drawable/logo" />
+    <FrameLayout
+        android:id="@+id/call_container"
+        android:layout_width="match_parent"
+        android:layout_below="@id/imageView3"
+        android:layout_marginHorizontal="13dp"
+
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_call_numbers"
+            android:layout_marginHorizontal="@dimen/large_margin"
+            android:layout_width="match_parent"
+
+            android:textSize="@dimen/school_details_textview_fontsize"
+            android:paddingVertical="@dimen/large_margin"
+            android:textColor="#de000000"
+            android:paddingLeft="35dp"
+            android:lineSpacingExtra="3sp"
+            android:text=""
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/call_round"/>
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/msg_container"
+        android:layout_width="match_parent"
+        android:layout_marginVertical="@dimen/medium_margin"
+        android:layout_below="@id/call_container"
+        android:layout_marginHorizontal="13dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_message"
+
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="@dimen/large_margin"
+            android:textSize="@dimen/school_details_textview_fontsize"
+            android:paddingVertical="@dimen/large_margin"
+            android:textColor="#de000000"
+            android:paddingLeft="35dp"
+            android:lineSpacingExtra="6sp"
+
+            android:text=""
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/email_round"/>
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/location_container"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/small_margin"
+        android:layout_below="@id/msg_container"
+        android:layout_marginHorizontal="13dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_location"
+            android:minLines="3"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="@dimen/large_margin"
+            android:textSize="@dimen/school_details_textview_fontsize"
+            android:paddingVertical="@dimen/large_margin"
+            android:textColor="#de000000"
+            android:paddingLeft="35dp"
+            android:lineSpacingExtra="2.5sp"
+            android:scrollHorizontally="false"
+            android:text=""
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/location_round"/>
+    </FrameLayout>
+    <include
+        android:id="@+id/progressBarHolder"
+        layout="@layout/overlay"
+        android:visibility="gone"
+        />
+</RelativeLayout>

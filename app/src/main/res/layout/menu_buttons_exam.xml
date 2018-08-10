@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/list_menu_width" android:layout_height="match_parent">
+    <FrameLayout
+        android:layout_width="@dimen/list_menu_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:onClick="onClickExam"
+        android:clickable="true"
+
+        >
+
+
+        <ImageButton
+            android:id="@+id/backgroundImage"
+            android:clickable="false"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/round_textbox" />
+
+        <ImageButton
+            android:id="@+id/backgroundImage2"
+            android:layout_width="2dp"
+            android:clickable="false"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_marginRight="50dp"
+            android:layout_marginVertical="5dp"
+            android:background="@drawable/line_bar_dark" />
+
+        <ImageButton
+            android:id="@+id/backgroundImage3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_marginRight="20dp"
+            android:layout_marginVertical="10dp"
+            android:clickable="false"
+            android:background="@drawable/go_icon"
+            android:scaleType="center" />
+
+        <TextView
+            android:id="@+id/list_item_text"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:paddingLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="70dp"
+            android:text="Assessments Details"
+            android:layout_gravity="center_vertical"
+            android:clickable="false"
+            android:textColor="@color/darkgray"
+            android:textSize="14sp" />
+
+
+    </FrameLayout>
+</RelativeLayout>

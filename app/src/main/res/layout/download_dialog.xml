@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="250dp"
+    android:background="@drawable/round_ractangle_shape"
+
+    android:id="@+id/dialogButtonOK"
+    android:layout_height="wrap_content" >
+
+
+
+    <ImageButton
+        android:id="@+id/download_button"
+        android:layout_width="100px"
+        android:layout_height="wrap_content"
+        android:text=" Ok "
+        android:clickable="false"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent"
+        android:src="@drawable/download_icon"
+        />
+    <TextView
+        android:layout_below="@id/download_button"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+        android:text="Download PDF"/>
+
+</RelativeLayout>

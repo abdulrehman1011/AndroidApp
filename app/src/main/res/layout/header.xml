@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/header_height"
+    android:background="@color/red">
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:onClick="onHeaderBack"
+            android:paddingVertical="@dimen/medium_margin"
+            android:paddingHorizontal="10dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/back_icon" />
+        <TextView
+            android:id="@+id/tvHeaderTitle"
+            android:layout_width="wrap_content"
+            android:scrollHorizontally="true"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:onClick="onHeaderBack"
+            android:layout_toLeftOf="@id/btn_notification"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/btn_back"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/header_text_size"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:text="Title"
+            android:lineSpacingExtra="3.5sp"/>
+        <ImageButton
+            android:id="@+id/btn_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/header_menu_marginR"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:paddingHorizontal="@dimen/large_margin"
+            android:background="@android:color/transparent"
+            android:contentDescription="no image"
+            android:onClick="onContextMenuClick"
+            android:src="@drawable/menu_icon" />
+        <ImageButton
+            android:id="@+id/btn_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/medium_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:background="@android:color/transparent"
+            android:layout_toLeftOf="@id/btn_menu"
+            android:onClick="onClickNotification"
+            android:src="@drawable/notifications_icon" />
+</RelativeLayout>

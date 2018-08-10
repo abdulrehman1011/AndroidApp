@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/medium_margin"
+    android:background="@drawable/round_ractangle_shape"
+
+    android:layout_marginVertical="@dimen/medium_margin"
+    >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/tv_notification_title"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/medium_margin"
+            android:textSize="@dimen/notifications_title_fontsize"
+            android:textStyle="bold"
+            android:textColor="#000000"
+
+            android:lineSpacingExtra="3sp"
+
+            android:text="Recent Notification | 20th Apr" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/notification_line"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="@dimen/medium_margin"
+            android:layout_below="@id/tv_notification_title"
+            android:layout_height="1dp" android:background="#AFACAC"></LinearLayout>
+        <TextView
+            android:id="@+id/tv_notification_content"
+            android:layout_width="match_parent"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_below="@id/notification_line"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/medium_margin"
+            android:textSize="@dimen/notifications_textview_fontsize"
+            android:paddingRight="@dimen/small_margin"
+            android:textColor="#de000000"
+            android:layout_marginBottom="@dimen/small_margin"
+            android:lineSpacingExtra="4sp"
+
+            android:text="Chambray Carles Terry Gibson balls plaid wolf. Disrupt fashion axe 90&apos;s quinoa +1 Neutra. Irony ethnic ennui McSweeney&apos;s, semiotics small batch squid direct trade. Readymade salvia Echo Park scenester. Farm-to-table selvage small batch sch swag a"/>
+
+
+</RelativeLayout>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"  >
+
+    <item
+        android:id="@+id/cmCall"
+        android:icon="@drawable/call_icon"
+
+        android:title="Call" />
+    <item
+        android:id="@+id/cmEmail"
+        android:visible="false"
+        android:icon="@drawable/email_icon"
+        android:title="Email" />
+
+
+</menu>

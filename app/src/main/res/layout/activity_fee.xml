@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.app.activities.FeeActivity">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/header"
+        />
+
+    <ListView
+        android:id="@+id/fee_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/include"
+        android:divider="@null"
+        android:listSelector="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent"
+        android:layout_marginTop="@dimen/medium_margin"
+     />
+    <include
+        android:id="@+id/progressBarHolder"
+        layout="@layout/overlay"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center_horizontal"
+    tools:context="com.app.activities.StudentActivity">
+    <include
+        android:id="@+id/include"
+        layout="@layout/header" />
+
+
+
+    <LinearLayout
+        android:id="@+id/std_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingHorizontal="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/list_menu_margintop"
+        android:layout_marginBottom="@dimen/small_margin"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/medium_margin"
+            android:text="@string/menu_profile"
+            android:textColor="@color/black"
+            android:onClick="onClickProfile"
+
+            android:background="@drawable/profile_gray_bg" />
+        <Button
+            android:id="@+id/attendance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_attendance"
+            android:onClick="onClickAtt"
+            android:textColor="@color/black"
+            android:background="@drawable/attendance_gray_bg" />
+        <Button
+            android:id="@+id/exam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_exam"
+            android:onClick="onClickExam"
+            android:layout_marginVertical="@dimen/medium_margin"
+            android:textColor="@color/black"
+
+            android:background="@drawable/assessment_gray_bg" />
+        <Button
+            android:id="@+id/fee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_fee"
+            android:onClick="onClickFee"
+            android:textColor="@color/black"
+            android:background="@drawable/fee_gray_bg" />
+
+
+      <!--  <include
+            android:id="@+id/fee"
+            layout="@layout/menu_buttons_fee"
+            android:layout_width="@dimen/list_menu_width"
+            android:layout_height="wrap_content"
+
+            />-->
+    </LinearLayout>
+    <include
+        android:visibility="gone"
+        android:id="@+id/notification_box"
+        layout="@layout/notification_layout" />
+
+
+</LinearLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.app.activities.ExamActivity">
+    <include
+        android:id="@+id/include"
+        layout="@layout/header" />
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/logo_margin_top_list"
+        android:src="@drawable/logo" />
+
+    <ListView
+        android:id="@+id/listview_exam"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:listSelector="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent"
+        android:layout_below="@id/imageView3"
+        android:divider="@null"
+        android:layout_marginHorizontal="@dimen/list_margin_exam"
+        android:layout_marginTop="@dimen/medium_margin" />
+    <include
+        android:id="@+id/progressBarHolder"
+        layout="@layout/overlay"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>

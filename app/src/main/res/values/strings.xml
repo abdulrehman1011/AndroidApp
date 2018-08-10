@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">American Lyceum</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_profile">Student Profile</string>
+    <string name="menu_attendance">Attendance Record</string>
+    <string name="menu_fee">Fee Record</string>
+    <string name="menu_exam">Assessment Details</string>
+    <string name="header_intro">American Lyceum</string>
+    <string name="header_home">Am\'ly Family</string>
+    <string name="header_login">American Lyceum</string>
+    <string name="header_student">Home</string>
+    <string name="header_profile">Profile</string>
+    <string name="header_fee">Fee Month</string>
+    <string name="header_notification">Notifications</string>
+    <string name="header_fee_detail">Fee Details</string>
+    <string name="header_exam"> - Assessments</string>
+    <string name="header_attendance">Attendance</string>
+    <string name="header_school_detail">School Details</string>
+    <string name="main_screen_message">The teachers at ALIS Learning Centers are passionate about your child\’s happiness and growth. They\'re dedicated to providing a safe, nurturing environment that cultivates self-esteem. ALIS is more than a job to them. It\'s an opportunity to share their passion for life while they awaken the wonder inside each and every child.</string>
+    <string name="title_activity_home2">Home2Activity</string>
+</resources>
