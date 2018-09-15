@@ -142,4 +142,5 @@
     <color name="black">#000000</color>
     <color name="red1">#A4191C</color>
     <color name="lightgray1">#F0EFEB</color>
+    <color name="statusbarcolor">#e6194b</color>
 </resources>

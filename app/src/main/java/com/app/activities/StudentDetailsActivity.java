@@ -3,13 +3,16 @@ package com.app.activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +23,9 @@ import com.app.models.StudentList;
 import com.app.network.StudentDataService;
 import com.app.network.StudentSchoolProfileService;
 import com.app.sessions.SessionManager;
+import com.app.utils.ImageHolder;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -44,6 +49,16 @@ public class StudentDetailsActivity extends BaseActivity {
         mContact = (TextView) findViewById(R.id.tv_call_numbers);
         mEmail = (TextView) findViewById(R.id.tv_message);
         mAddress = (TextView) findViewById(R.id.tv_location);
+        try {
+            mHeaderTitle.setTextColor(Color.parseColor(ImageHolder.getHeaderTextColor()));
+            RelativeLayout rl = (RelativeLayout)findViewById(R.id.include);
+            rl.setBackgroundColor(Color.parseColor(ImageHolder.getHeaderColor()));
+            Picasso.get().load(ImageHolder.getLogoUrl()).into((ImageView)findViewById(R.id.imageView3));
+        }
+        catch (Exception ex)
+        {
+
+        }
         if(getIntent().getExtras().getString("student_id") != null)
         {
 

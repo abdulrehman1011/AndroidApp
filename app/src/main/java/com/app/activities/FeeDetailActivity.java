@@ -14,6 +14,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -30,6 +32,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -43,7 +46,9 @@ import com.app.models.StudentList;
 import com.app.network.StudentFeeMonthService;
 import com.app.network.StudentFeeVoucherService;
 import com.app.sessions.SessionManager;
+import com.app.utils.ImageHolder;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -67,7 +72,7 @@ public class FeeDetailActivity extends BaseActivity implements View.OnClickListe
     private TextView feeAmountPaid;
     private TextView feeOutstandingAmountPaid;
     private TextView feeDepositDate;
-    private Button btnGetVoucher;
+    private FrameLayout btnGetVoucher;
     private static String POPUP_CONSTANT = "mPopup";
     private static String POPUP_FORCE_SHOW_ICON = "setForceShowIcon";
     FrameLayout overlay;
@@ -97,7 +102,27 @@ public class FeeDetailActivity extends BaseActivity implements View.OnClickListe
         feeAmountPaid = (TextView) findViewById(R.id.fee_amount_paid);
         feeOutstandingAmountPaid = (TextView) findViewById(R.id.fee_outstanding_amount);
         feeDepositDate = (TextView) findViewById(R.id.fee_deposit_date);
-        btnGetVoucher = (Button) findViewById(R.id.btn_get_voucher);
+        btnGetVoucher = (FrameLayout) findViewById(R.id.btn_get_voucher);
+        try {
+            mHeaderTitle.setTextColor(Color.parseColor(ImageHolder.getHeaderTextColor()));
+            RelativeLayout rl = (RelativeLayout)findViewById(R.id.include);
+            rl.setBackgroundColor(Color.parseColor(ImageHolder.getHeaderColor()));
+            Picasso.get().load(ImageHolder.getLogoUrl()).into((ImageView)findViewById(R.id.imageView4));
+        }
+        catch (Exception ex)
+        {
+
+        }
+        try {
+            Picasso.get().load(ImageHolder.getRedBtnUrl()).into((ImageView) findViewById(R.id.redbtn_image));
+            //BitmapDrawable bdrawable = new BitmapDrawable(getApplicationContext().getResources(), ImageHolder.getBitmap("redbtn"));
+            //btnGetVoucher.setBackground(bdrawable);
+        }
+        catch (Exception ex)
+        {
+
+        }
+
         btnGetVoucher.setOnClickListener(this);
         overlay = (FrameLayout) findViewById(R.id.progressBarHolder);
         overlay.setVisibility(View.VISIBLE);
@@ -106,9 +131,9 @@ public class FeeDetailActivity extends BaseActivity implements View.OnClickListe
         StudentList studentList = gson.fromJson(session.getValues("RECORDS"), StudentList.class);
         for (Student std:studentList.getStudents())
         {
-            if(std.getStudent_id().equals(mStudentId))
+            if(std.getStudentId().equals(mStudentId))
             {
-                stdName.setText(std.getStudent_name());
+                stdName.setText(std.getStudentName());
                 break;
             }
         }

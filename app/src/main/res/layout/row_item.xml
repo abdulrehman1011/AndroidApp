@@ -14,9 +14,10 @@
     android:layout_marginVertical="@dimen/small_margin"
     android:layout_height="wrap_content">
         <ImageView
+            android:id="@+id/student_row_item_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/button"/>
+            />
         <TextView
             android:id="@+id/list_item_text"
             android:layout_width="wrap_content"

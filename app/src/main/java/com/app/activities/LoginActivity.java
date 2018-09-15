@@ -2,12 +2,18 @@ package com.app.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.hardware.camera2.TotalCaptureResult;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -17,10 +23,17 @@ import android.widget.Toast;
 
 import com.app.interfaces.IServices;
 import com.app.lyceum.american.americanlyceumapp.R;
+import com.app.models.AppRateUrlModel;
 import com.app.models.StudentList;
 import com.app.network.Services;
 import com.app.sessions.SessionManager;
+import com.app.utils.ImageHolder;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.onesignal.OSPermissionSubscriptionState;
+import com.onesignal.OneSignal;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -32,10 +45,13 @@ public class LoginActivity extends BaseActivity {
     private TextView mHeaderTitle;
     private EditText mUserMobileNo;
     private StudentList stdObj;
+    private String mPlayerId;
     SessionManager session = null;
     FrameLayout overlay;
     private static String POPUP_CONSTANT = "mPopup";
     private static String POPUP_FORCE_SHOW_ICON = "setForceShowIcon";
+    double density;
+    String screenDensity= "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +60,36 @@ public class LoginActivity extends BaseActivity {
         mHeaderTitle = (TextView) findViewById(R.id.tvHeaderTitle);
         mHeaderTitle.setText(getString(R.string.header_login));
         overlay = (FrameLayout) findViewById(R.id.progressBarHolder);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.RED);
+        }
+        density = getResources().getDisplayMetrics().density;
+        switch (getResources().getDisplayMetrics().densityDpi) {
+            case DisplayMetrics.DENSITY_LOW:
+                screenDensity = "drawable-ldpi";
+                break;
+            case DisplayMetrics.DENSITY_MEDIUM:
+                screenDensity = "drawable-mdpi";
+                break;
+            case DisplayMetrics.DENSITY_HIGH:
+                screenDensity = "drawable-hdpi";
+                break;
+            case DisplayMetrics.DENSITY_XHIGH:
+                screenDensity = "drawable-xhdpi";
+                break;
+            case DisplayMetrics.DENSITY_XXHIGH:
+                screenDensity = "drawable-xxhdpi";
+                break;
+            case DisplayMetrics.DENSITY_XXXHIGH:
+                screenDensity = "drawable-xxxhdpi";
+                break;
+        }
+        double d = getResources().getDisplayMetrics().density;
         ((ImageButton)findViewById(R.id.btn_notification)).setVisibility(View.GONE);
+        OSPermissionSubscriptionState status = OneSignal.getPermissionSubscriptionState();
+        mPlayerId = status.getSubscriptionStatus().getUserId();
         session = new SessionManager(getApplicationContext());
         if(!session.getValues("RECORDS").equals(""))
         {
@@ -135,16 +180,55 @@ public class LoginActivity extends BaseActivity {
         protected StudentList doInBackground(String... params) {
 
             service = new Services(mContext,getApplication());
-            stdObj = service.GetStudentList(mUserMobileNo.getText().toString().trim());
+            stdObj = service.GetStudentList(mUserMobileNo.getText().toString().trim(), mPlayerId);
+            AppRateUrlModel rateUrl = service.GetAppRateURL("2160");
+            if(rateUrl != null && !rateUrl.getRateUrl().equalsIgnoreCase(""))
+            {
+                session.addValues("rate_url",rateUrl.getRateUrl());
+            }
+            //ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
+                 //   getApplicationContext())
+                //    .build();
+          //  ImageLoader imageLoader = ImageLoader.getInstance();
+           // imageLoader.init(config);
+           // Bitmap logo = imageLoader.loadImageSync(stdObj.getStudents().get(0).getLogoFolder()+"/"+screenDensity+"/logo.png");
+           // Bitmap btnImage = imageLoader.loadImageSync(stdObj.getStudents().get(0).getHomebuttoncolor()+"/"+screenDensity+"/button.png");
+           // ImageHolder.addBitmap(logo,"logo");
+            //ImageHolder.addBitmap(btnImage,"redbtn");
+            if(stdObj.getStudents().size() > 0)
+            {
+                String headerError = stdObj.getStudents().get(0).getHeadercolor();
+                headerError = headerError.replace("\r\n","");
+                String hh = stdObj.getStudents().get(0).getHeaderTextColor();
+                stdObj.getStudents().get(0).setHeadercolor(headerError);
+                ImageHolder.setRedBtnUrl(stdObj.getStudents().get(0).getHomebuttoncolor()+"/"+screenDensity+"/button.png");
+                ImageHolder.setLogoUrl(stdObj.getStudents().get(0).getLogoFolder()+"/"+screenDensity+"/logo.png");
+                ImageHolder.setHeaderColor(stdObj.getStudents().get(0).getHeadercolor());
+                ImageHolder.setMenuItemBgColor(stdObj.getStudents().get(0).getMenuItemBackgroundcolor());
+                ImageHolder.setMenuMainBackgroundColor(stdObj.getStudents().get(0).getMainBackgroundColor());
+                ImageHolder.setMenuTextColor(stdObj.getStudents().get(0).getMenuTextColor());
+                ImageHolder.setStatusbarColor(stdObj.getStudents().get(0).getStatusbarcolor());
+                ImageHolder.setHeaderTextColor(stdObj.getStudents().get(0).getHeaderTextColor() == null?"#FF00000":stdObj.getStudents().get(0).getHeaderTextColor());
+            }
+
             return stdObj;
         }
         @Override
         protected void onPostExecute(StudentList result) {
             if(result != null && result.getStudents().size() > 0)
             {
-                Gson gson = new Gson();
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.serializeNulls();
+                Gson gson = gsonBuilder.create();
                 String jsonInString = gson.toJson(result);
-
+                session.addValues("menuItemBackgroundColor",result.getStudents().get(0).getMenuItemBackgroundcolor());
+                session.addValues("menuTextColor",result.getStudents().get(0).getMenuTextColor());
+                session.addValues("MainBackgroundColor",result.getStudents().get(0).getMainBackgroundColor());
+                session.addValues("statusBarColor",result.getStudents().get(0).getStatusbarcolor());
+                session.addValues("logo",result.getStudents().get(0).getLogoFolder()+"/"+screenDensity+"/logo.png");
+                session.addValues("redbtn",result.getStudents().get(0).getHomebuttoncolor()+"/"+screenDensity+"/button.png");
+                session.addValues("headerColor",result.getStudents().get(0).getHeadercolor());
+                session.addValues("headerTextColor",result.getStudents().get(0).getHeaderTextColor()==null?"#FF00000":result.getStudents().get(0).getHeaderTextColor());
                 session.addValues("RECORDS",jsonInString);
                 session.addValues("USERID",mUserMobileNo.getText().toString().trim());
 

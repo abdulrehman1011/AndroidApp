@@ -8,13 +8,13 @@
     tools:context="com.app.activities.Home2Activity"
     tools:showIn="@layout/app_bar_home2">
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/home_logo_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/logo_margin_top_list"
-        android:src="@drawable/logo" />
+         />
     <ListView
         android:id="@+id/listview_students"
         android:layout_width="match_parent"
@@ -26,6 +26,6 @@
         android:layout_marginHorizontal="@dimen/list_margin"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/imageView3"
+        android:layout_below="@id/home_logo_image"
         />
 </RelativeLayout>

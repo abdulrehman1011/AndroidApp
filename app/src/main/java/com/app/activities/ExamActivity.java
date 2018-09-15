@@ -3,6 +3,7 @@ package com.app.activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,8 +11,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +30,9 @@ import com.app.models.StudentList;
 import com.app.network.StudentDataService;
 import com.app.network.StudentExamService;
 import com.app.sessions.SessionManager;
+import com.app.utils.ImageHolder;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -50,20 +55,31 @@ public class ExamActivity extends BaseActivity implements AdapterView.OnItemClic
         {
             mStudentId = getIntent().getExtras().getString("student_id");
         }
+
         Gson gson = new Gson();
         SessionManager session = new SessionManager(getApplicationContext());
         StudentList studentList = gson.fromJson(session.getValues("RECORDS"), StudentList.class);
         examList =(ListView)findViewById(R.id.listview_exam);
         for (Student std:studentList.getStudents())
         {
-            if(std.getStudent_id().equals(mStudentId))
+            if(std.getStudentId().equals(mStudentId))
             {
-                stdName = std.getStudent_name();
+                stdName = std.getStudentName();
                 break;
             }
         }
         mHeaderTitle = (TextView) findViewById(R.id.tvHeaderTitle);
         mHeaderTitle.setText(stdName+""+getString(R.string.header_exam));
+        try {
+            mHeaderTitle.setTextColor(Color.parseColor(ImageHolder.getHeaderTextColor()));
+            RelativeLayout rl = (RelativeLayout)findViewById(R.id.include);
+            rl.setBackgroundColor(Color.parseColor(ImageHolder.getHeaderColor()));
+            Picasso.get().load(ImageHolder.getLogoUrl()).into((ImageView)findViewById(R.id.imageView3));
+        }
+        catch (Exception ex)
+        {
+
+        }
         mHeaderTitle.setTextSize(16.0f);
         overlay = (FrameLayout) findViewById(R.id.progressBarHolder);
         overlay.setVisibility(View.VISIBLE);

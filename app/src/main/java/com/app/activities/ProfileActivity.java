@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +24,7 @@ import com.app.models.StudentDetail;
 import com.app.models.StudentList;
 import com.app.network.StudentDataService;
 import com.app.sessions.SessionManager;
+import com.app.utils.ImageHolder;
 import com.app.utils.Util;
 import com.google.gson.Gson;
 
@@ -61,6 +64,16 @@ public class ProfileActivity extends BaseActivity {
         }
         mHeaderTitle = (TextView) findViewById(R.id.tvHeaderTitle);
         mHeaderTitle.setText(getString(R.string.header_profile));
+        try {
+            mHeaderTitle.setTextColor(Color.parseColor(ImageHolder.getHeaderTextColor()));
+            RelativeLayout rl = (RelativeLayout)findViewById(R.id.include);
+            rl.setBackgroundColor(Color.parseColor(ImageHolder.getHeaderColor()));
+        }
+        catch (Exception ex)
+        {
+
+        }
+
         stdName = (TextView) findViewById(R.id.std_name);
         fatherName = (TextView) findViewById(R.id.father_name);
         motherName = (TextView) findViewById(R.id.mother_name);

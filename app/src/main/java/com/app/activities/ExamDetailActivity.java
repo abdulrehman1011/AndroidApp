@@ -3,6 +3,8 @@ package com.app.activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,8 +14,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +30,9 @@ import com.app.models.StudentExamDetail;
 import com.app.models.StudentList;
 import com.app.network.StudentExamMarksDetailService;
 import com.app.sessions.SessionManager;
+import com.app.utils.ImageHolder;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -43,11 +49,13 @@ public class ExamDetailActivity extends BaseActivity implements AdapterView.OnIt
     private int mExamId;
     private String mExamName;
     private TextView mHeaderTitle;
+    private TextView mExamResultTitle;
+
     private StudentExamDetail examObj;
     private String mExamJsonData;
     ListView examDetailList;
     FrameLayout overlay;
-    Button btnNextExamResult;
+    FrameLayout btnNextExamResult;
     List<ExamType> mExamData;
     private int mNextExamId = 0;
     private static String POPUP_CONSTANT = "mPopup";
@@ -83,8 +91,29 @@ public class ExamDetailActivity extends BaseActivity implements AdapterView.OnIt
         mHeaderTitle = (TextView) findViewById(R.id.tvHeaderTitle);
         mHeaderTitle.setText(mExamName);
         examDetailList =(ListView)findViewById(R.id.list_exam_detail);
+        btnNextExamResult = (FrameLayout)findViewById(R.id.btn_exam_detail_next);
+        mExamResultTitle =  (TextView) findViewById(R.id.exam_detail);
+        try {
+            mHeaderTitle.setTextColor(Color.parseColor(ImageHolder.getHeaderTextColor()));
+            RelativeLayout rl = (RelativeLayout)findViewById(R.id.include);
+            rl.setBackgroundColor(Color.parseColor(ImageHolder.getHeaderColor()));
+        }
+        catch (Exception ex)
+        {
+
+        }
         overlay = (FrameLayout) findViewById(R.id.progressBarHolder);
-        btnNextExamResult = (Button)findViewById(R.id.btn_exam_detail_next);
+
+        try {
+            Picasso.get().load(ImageHolder.getRedBtnUrl()).into((ImageView) findViewById(R.id.redbtn_image));
+            //BitmapDrawable bdrawable = new BitmapDrawable(getApplicationContext().getResources(), ImageHolder.getBitmap("redbtn"));
+            //btnNextExamResult.setBackground(bdrawable);
+        }
+        catch (Exception ex)
+        {
+
+        }
+
         btnNextExamResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -192,14 +221,14 @@ public class ExamDetailActivity extends BaseActivity implements AdapterView.OnIt
                     mNextExamId = mExamData.get(0).getTestId();
                     mExamId = mNextExamId;
                     mExamName = mExamData.get(0).getTestName();
-                    btnNextExamResult.setText(mExamName);
+                    mExamResultTitle.setText(mExamName);
                 }
                 else
                 {
                     mNextExamId = mExamData.get(i+1).getTestId();
                     mExamId = mNextExamId;
                     mExamName = mExamData.get(i+1).getTestName();
-                    btnNextExamResult.setText(mExamName);
+                    mExamResultTitle.setText(mExamName);
                     break;
                 }
 

@@ -1,5 +1,6 @@
 package com.app.interfaces;
 
+import com.app.models.AppRateUrlModel;
 import com.app.models.SchoolProfile;
 import com.app.models.StudentAttendance;
 import com.app.models.StudentDetail;
@@ -14,7 +15,7 @@ import com.app.network.StudentExamService;
 
 public interface IServices {
 
-    public StudentList GetStudentList(String mobileNo);
+    public StudentList GetStudentList(String mobileNo, String playerId);
     public StudentDetail GetStudentDetail(String studentId);
     public StudentFee GetStudentFee(String studentId);
     public StudentFeeDetail GetStudentFeeMonthDetail(String studentId, String feeMonth);
@@ -23,4 +24,5 @@ public interface IServices {
     public _StudentAttendance GetStudentAttendance(String studentId);
     public StudentNotification GetStudentNotifications(String studentId);
     public SchoolProfile GetStudentSchoolProfile(String studentId);
+    AppRateUrlModel GetAppRateURL(String id);
 }

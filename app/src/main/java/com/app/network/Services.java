@@ -3,6 +3,7 @@ package com.app.network;
 import android.app.Application;
 import android.content.Context;
 
+import com.app.models.AppRateUrlModel;
 import com.app.models.SchoolProfile;
 import com.app.models.StudentAttendance;
 import com.app.models.StudentDetail;
@@ -22,11 +23,11 @@ public class Services implements com.app.interfaces.IServices{
         this.appObj = app;
     }
     @Override
-    public StudentList GetStudentList(String mobileNo) {
+    public StudentList GetStudentList(String mobileNo, String playerId) {
         StudentList studentObject;
         try {
             StudentServices stdService = new StudentServices(appObj);
-            studentObject = stdService.getStudents(mobileNo);
+            studentObject = stdService.getStudents(mobileNo,playerId);
             return studentObject;
         }
         catch (Exception ex)
@@ -146,4 +147,17 @@ public class Services implements com.app.interfaces.IServices{
         }
         return null;
 }
+
+    @Override
+    public AppRateUrlModel GetAppRateURL(String id) {
+        try {
+            AppRateUrlService appRateUrlService = new AppRateUrlService(appObj);
+
+            return appRateUrlService.getRateUrl(id);
+        }
+        catch (Exception ex)
+        {
+        }
+        return null;
+    }
 }

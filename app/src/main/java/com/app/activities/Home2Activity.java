@@ -1,9 +1,17 @@
 package com.app.activities;
 
+import android.app.ActionBar;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,7 +25,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,6 +37,10 @@ import com.app.lyceum.american.americanlyceumapp.R;
 import com.app.models.Student;
 import com.app.models.StudentList;
 import com.app.sessions.SessionManager;
+import com.app.utils.ImageHolder;
+import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
 
 public class Home2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,6 +48,7 @@ public class Home2Activity extends AppCompatActivity
     ListView studentList;
     StudentList list;
     SessionManager session = null;
+    ImageView mLogoImage, mSideMenuLogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +59,8 @@ public class Home2Activity extends AppCompatActivity
         toolbar.setOverflowIcon(null);
         toolbar.setContentInsetsAbsolute(0,0);
         toolbar.setContentInsetStartWithNavigation(0);
+        toolbar.setBackgroundColor(Color.parseColor(ImageHolder.getHeaderColor()));
+        toolbar.setTitleTextColor(Color.parseColor(ImageHolder.getHeaderTextColor()));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -51,10 +69,72 @@ public class Home2Activity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.parseColor(ImageHolder.getStatusbarColor()));
+        }
+
         toolbar.setNavigationIcon(R.drawable.menu_icon);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_home);
         navigationView.setNavigationItemSelectedListener(this);
+
+
         navigationView.setItemIconTintList(null);
+        //Text color
+        int[][] state = new int[][] {
+                new int[] {-android.R.attr.state_enabled}, // disabled
+                new int[] {android.R.attr.state_enabled}, // enabled
+                new int[] {-android.R.attr.state_checked}, // unchecked
+                new int[] { android.R.attr.state_pressed}  // pressed
+
+        };
+        try {
+            int color = Color.parseColor(ImageHolder.getMenuTextColor());
+            int[] colorList = new int[] {
+                    color,
+                    color,
+                    color,
+                    color
+            };
+
+            ColorStateList ColorStateList1 = new ColorStateList(state, colorList);
+            navigationView.setItemTextColor(ColorStateList1);
+            // end
+            //Set Item back ground
+            ColorDrawable cd = new ColorDrawable(Color.parseColor(ImageHolder.getMenuItemBgColor()));
+
+            navigationView.setItemBackground(cd);
+            //end
+            //Set background
+            navigationView.setBackgroundColor(Color.parseColor(ImageHolder.getMenuMainBackgroundColor()));
+            //end
+            //header nav
+            View headerLayout = navigationView.getHeaderView(0);
+            headerLayout.setBackgroundColor(Color.parseColor(ImageHolder.getHeaderColor()));
+            mSideMenuLogo = (ImageView)headerLayout.findViewById(R.id.side_menu_logo) ;
+            //end
+            mLogoImage = (ImageView)findViewById(R.id.home_logo_image) ;
+            if(!ImageHolder.getLogoUrl().equalsIgnoreCase(""))
+            {
+
+                Picasso.get().load(ImageHolder.getLogoUrl()).into(mLogoImage);
+                Picasso.get().load(ImageHolder.getLogoUrl()).into(mSideMenuLogo);
+                //mLogoImage.setImageBitmap(ImageHolder.getBitmap("logo"));
+                //mSideMenuLogo.setImageBitmap(ImageHolder.getBitmap("logo"));
+            }
+            else
+            {
+                mLogoImage.setImageResource(R.drawable.logo);
+                mSideMenuLogo.setImageResource(R.drawable.logo);
+            }
+
+        }catch (Exception ex)
+        {
+
+        }
+
+
         session = new SessionManager(getApplicationContext());
         try {
             list = (StudentList)getIntent().getExtras().getParcelable("LIST");
@@ -69,7 +149,7 @@ public class Home2Activity extends AppCompatActivity
                         Student std = list.getStudents().get(position);
                         Intent i =  new Intent();
                         i.setClass(Home2Activity.this, StudentActivity.class);
-                        i.putExtra("student_id", std.student_id);
+                        i.putExtra("student_id", std.getStudentId());
                         startActivity(i);
                         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                     }
@@ -126,33 +206,40 @@ public class Home2Activity extends AppCompatActivity
 
             Intent i =  new Intent();
             i.setClass(this, StudentDetailsActivity.class);
-            i.putExtra("student_id", list.getStudents().get(0).student_id);
+            i.putExtra("student_id", list.getStudents().get(0).getStudentId());
             startActivity(i);
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         } else if (id == R.id.nav_notifications) {
             Intent i =  new Intent();
             i.setClass(this, NotificationActivity.class);
-            i.putExtra("student_id", list.getStudents().get(0).student_id);
+            i.putExtra("student_id", list.getStudents().get(0).getStudentId());
             startActivity(i);
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         } else if (id == R.id.nav_student_gallery) {
 
         } else if (id == R.id.nav_rateus) {
-            Uri uri = Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
-            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
-            // To count with Play market backstack, After pressing back button,
-            // to taken back to our application, we need to add following flags to intent.
-            goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
-                    Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
-                    Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-            try {
-                startActivity(goToMarket);
-            } catch (ActivityNotFoundException e) {
-                startActivity(new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("http://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName())));
+
+            //Uri uri = Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
+            String rateUrl = session.getValues("rate_url");
+            if(!rateUrl.equalsIgnoreCase(""))
+            {
+                Uri uri = Uri.parse(rateUrl);
+                Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                // To count with Play market backstack, After pressing back button,
+                // to taken back to our application, we need to add following flags to intent.
+                goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                        Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                        Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                try {
+                    startActivity(goToMarket);
+                } catch (ActivityNotFoundException e) {
+                    startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse(rateUrl)));
+                }
             }
+
 
         } else if (id == R.id.nav_logout) {
             session.logoutUser();
@@ -171,7 +258,7 @@ public class Home2Activity extends AppCompatActivity
     public void onClickRightMenu(View item) {
         Intent i =  new Intent();
         i.setClass(this, NotificationActivity.class);
-        i.putExtra("student_id", list.getStudents().get(0).student_id);
+        i.putExtra("student_id", list.getStudents().get(0).getStudentId());
         startActivity(i);
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }

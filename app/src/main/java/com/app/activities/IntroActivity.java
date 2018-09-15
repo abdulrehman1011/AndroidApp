@@ -1,10 +1,14 @@
 package com.app.activities;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -20,13 +24,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.app.interfaces.InternetConnectionListener;
 import com.app.lyceum.american.americanlyceumapp.R;
 import com.app.models.StudentList;
+import com.app.network.Services;
 import com.app.sessions.SessionManager;
+import com.app.utils.ImageHolder;
 import com.google.gson.Gson;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 import java.io.File;
 
@@ -34,6 +45,7 @@ import static android.support.constraint.Constraints.TAG;
 
 public class IntroActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, InternetConnectionListener {
+    SessionManager session = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +65,11 @@ public class IntroActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         toggle.syncState();
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.RED);
+        }
         toolbar.setNavigationIcon(null);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -73,24 +89,17 @@ public class IntroActivity extends AppCompatActivity
             toast.show();
         }
         boolean flag = isStoragePermissionGranted();
-        SessionManager session = null;
         try {
             session = new SessionManager(getApplicationContext());
-            if(!session.getValues("RECORDS").equals(""))
-            {
-                Gson gson = new Gson();
-                StudentList studentList = gson.fromJson(session.getValues("RECORDS"), StudentList.class);
-                Intent i =  new Intent();
-                i.setClass(this, Home2Activity.class);
-                i.putExtra("LIST", studentList);
-                startActivity(i);
-                finish();
-                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+            if(!session.getValues("RECORDS").equals("")) {
+
+                AsyncTaskRunner runner = new AsyncTaskRunner(this);
+                runner.execute();
             }
         }
         catch (Exception ex)
         {
-
+            System.out.println(ex.getMessage());
         }
 
 
@@ -202,6 +211,63 @@ public class IntroActivity extends AppCompatActivity
 
     public void onClickRightMenu(View item) {
         Toast.makeText(IntroActivity.this,"Liked",Toast.LENGTH_SHORT).show();
+    }
+    private class AsyncTaskRunner extends AsyncTask<String, Void, String> {
+        private Context mContext;
+
+        public AsyncTaskRunner (Context context){
+            mContext = context;
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try
+            {
+                String logoUrl = session.getValues("logo");
+                String btnImageUrl = session.getValues("redbtn");
+                //ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
+                     //   getApplicationContext())
+                        //.build();
+                //ImageLoader imageLoader = ImageLoader.getInstance();
+                //imageLoader.init(config);
+               // Bitmap logo = imageLoader.loadImageSync(logoUrl);
+                //Bitmap btnImage = imageLoader.loadImageSync(btnImageUrl);
+                //ImageHolder.addBitmap(logo,"logo");
+                //ImageHolder.addBitmap(btnImage,"redbtn");
+                ImageHolder.setRedBtnUrl(session.getValues("redbtn"));
+                ImageHolder.setLogoUrl(session.getValues("logo"));
+                ImageHolder.setHeaderColor(session.getValues("headerColor"));
+                ImageHolder.setMenuItemBgColor(session.getValues("menuItemBackgroundColor"));
+                ImageHolder.setMenuMainBackgroundColor(session.getValues("MainBackgroundColor"));
+                ImageHolder.setMenuTextColor(session.getValues("menuTextColor"));
+                ImageHolder.setStatusbarColor(session.getValues("statusBarColor"));
+                ImageHolder.setHeaderTextColor(session.getValues("headerTextColor"));
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            Gson gson = new Gson();
+            StudentList studentList = gson.fromJson(session.getValues("RECORDS"), StudentList.class);
+            Intent i =  new Intent();
+            i.setClass(getApplicationContext(), Home2Activity.class);
+            i.putExtra("LIST", studentList);
+            startActivity(i);
+            finish();
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                return "";
+        }
+
+
+
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+
+
     }
 
 }

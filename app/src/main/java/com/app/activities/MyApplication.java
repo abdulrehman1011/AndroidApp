@@ -10,6 +10,7 @@ import com.app.interfaces.APIInterface;
 import com.app.interfaces.InternetConnectionListener;
 import com.app.network.NetworkConnectionInterceptor;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.onesignal.OneSignal;
 
 import com.app.notifications.MyNotificationOpenedHandler;
@@ -60,7 +61,7 @@ public class MyApplication extends Application {
         return new Retrofit.Builder()
                 .baseUrl(url)
                 .client(provideOkHttpClient())
-                .addConverterFactory(GsonConverterFactory.create(new Gson()))
+                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().serializeNulls().create()))
                 .build();
     }
     private OkHttpClient provideOkHttpClient() {

@@ -3,6 +3,7 @@ package com.app.activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -11,8 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +31,9 @@ import com.app.network.StudentDataService;
 import com.app.network.StudentFeeMonthService;
 import com.app.network.StudentFeeService;
 import com.app.sessions.SessionManager;
+import com.app.utils.ImageHolder;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -58,6 +63,17 @@ public class FeeActivity extends BaseActivity implements AdapterView.OnItemClick
         }
         mHeaderTitle = (TextView) findViewById(R.id.tvHeaderTitle);
         mHeaderTitle.setText(getString(R.string.header_fee));
+        try {
+            mHeaderTitle.setTextColor(Color.parseColor(ImageHolder.getHeaderTextColor()));
+            RelativeLayout rl = (RelativeLayout)findViewById(R.id.include);
+            rl.setBackgroundColor(Color.parseColor(ImageHolder.getHeaderColor()));
+            Picasso.get().load(ImageHolder.getLogoUrl()).into((ImageView)findViewById(R.id.imageView3));
+        }
+        catch (Exception ex)
+        {
+
+        }
+
         overlay = (FrameLayout) findViewById(R.id.progressBarHolder);
         monthList =(ListView)findViewById(R.id.fee_list);
         overlay.setVisibility(View.VISIBLE);

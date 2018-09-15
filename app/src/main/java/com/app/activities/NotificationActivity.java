@@ -3,6 +3,7 @@ package com.app.activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import com.app.models.StudentNotification;
 import com.app.network.StudentFeeService;
 import com.app.network.StudentNotificationService;
 import com.app.sessions.SessionManager;
+import com.app.utils.ImageHolder;
 import com.google.gson.Gson;
 
 import java.lang.reflect.Field;
@@ -63,6 +65,16 @@ public class NotificationActivity extends BaseActivity {
         }
         mHeaderTitle = (TextView) findViewById(R.id.tvHeaderTitle);
         mHeaderTitle.setText(getString(R.string.header_notification));
+        try {
+            mHeaderTitle.setTextColor(Color.parseColor(ImageHolder.getHeaderTextColor()));
+            RelativeLayout rl = (RelativeLayout)findViewById(R.id.include);
+            rl.setBackgroundColor(Color.parseColor(ImageHolder.getHeaderColor()));
+        }
+        catch (Exception ex)
+        {
+
+        }
+
         overlay = (FrameLayout) findViewById(R.id.progressBarHolder);
         ((ImageButton)findViewById(R.id.btn_notification)).setVisibility(View.GONE);
         mNotificationList =(ListView)findViewById(R.id.list_notifications);

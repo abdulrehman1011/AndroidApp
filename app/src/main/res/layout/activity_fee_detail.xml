@@ -151,18 +151,38 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:text="" />
-        <Button
+        <FrameLayout
             android:id="@+id/btn_get_voucher"
             android:layout_width="match_parent"
             android:layout_marginHorizontal="80dp"
             android:paddingRight="50dp"
             android:layout_marginTop="@dimen/medium_margin"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-
+            android:clickable="true"
+            android:layout_gravity="center_horizontal"
             android:layout_weight="@dimen/profile_textview_weight"
-            android:background="@drawable/button"
-            android:text="Get Voucher" />
+            >
+            <ImageView
+                android:id="@+id/redbtn_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:layout_gravity="center_horizontal"
+                />
+            <TextView
+                android:id="@+id/exam_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:clickable="false"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:paddingLeft="@dimen/small_margin"
+                android:layout_gravity="center_vertical"
+                android:text="Get Voucher"/>
+        </FrameLayout>
+
 
     </LinearLayout>
     <include

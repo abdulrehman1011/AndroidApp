@@ -45,7 +45,7 @@ public class HomeActivity extends BaseActivity {
                     Student std = list.getStudents().get(position);
                     Intent i =  new Intent();
                     i.setClass(HomeActivity.this, StudentActivity.class);
-                    i.putExtra("student_id", std.student_id);
+                    i.putExtra("student_id", std.getStudentId());
                     startActivity(i);
                     overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                 }

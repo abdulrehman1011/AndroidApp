@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import com.app.models.StudentList;
 import com.app.models.StudentNotification;
 import com.app.network.StudentNotificationService;
 import com.app.sessions.SessionManager;
+import com.app.utils.ImageHolder;
 import com.app.utils.Util;
 import com.google.gson.Gson;
 
@@ -44,6 +46,15 @@ public class StudentActivity extends BaseActivity {
         setContentView(R.layout.activity_student);
         mHeaderTitle = (TextView) findViewById(R.id.tvHeaderTitle);
         mHeaderTitle.setText(getString(R.string.header_home));
+        try {
+            mHeaderTitle.setTextColor(Color.parseColor(ImageHolder.getHeaderTextColor()));
+            RelativeLayout rl = (RelativeLayout)findViewById(R.id.include);
+            rl.setBackgroundColor(Color.parseColor(ImageHolder.getHeaderColor()));
+        }
+        catch (Exception ex)
+        {
+
+        }
         if(getIntent().getExtras().getString("student_id") != null)
         {
             mStudentId = getIntent().getExtras().getString("student_id");

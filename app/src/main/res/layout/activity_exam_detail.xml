@@ -56,19 +56,37 @@
         android:textColor="@color/black"
         android:text="Obt. Marks" />
     </LinearLayout>
-    <Button
+    <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button"
-        android:text="Get Next Result"
-        android:textSize="12sp"
-        android:textColor="@color/white"
-        android:paddingRight="@dimen/large_margin"
-        android:stateListAnimator="@null"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:id="@+id/btn_exam_detail_next"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        android:clickable="true"
         android:layout_marginBottom="@dimen/large_margin"
-        android:id="@+id/btn_exam_detail_next"/>
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/redbtn_image"
+            android:layout_width="wrap_content"
+            android:clickable="false"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button"
+            />
+        <TextView
+            android:id="@+id/exam_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:clickable="false"
+            android:layout_marginLeft="@dimen/medium_margin"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:paddingLeft="@dimen/small_margin"
+            android:layout_gravity="center_vertical"
+            android:text="Get Next Result"/>
+    </FrameLayout>
+
     <ListView
         android:id="@+id/list_exam_detail"
         android:layout_width="match_parent"
@@ -86,7 +104,7 @@
     <include
         android:id="@+id/progressBarHolder"
         layout="@layout/overlay"
-        android:visibility="visible"
+        android:visibility="gone"
         />
 
 

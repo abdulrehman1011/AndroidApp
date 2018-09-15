@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import com.app.models.StudentList;
 import com.app.models._StudentAttendance;
 import com.app.network.StudentAttendanceService;
 import com.app.sessions.SessionManager;
+import com.app.utils.ImageHolder;
 import com.google.gson.Gson;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;
@@ -64,6 +66,15 @@ public class AttendanceActivity extends BaseActivity {
         setContentView(R.layout.activity_attendance);
         mHeaderTitle = (TextView) findViewById(R.id.tvHeaderTitle);
         mHeaderTitle.setText(getString(R.string.header_attendance));
+        mHeaderTitle.setTextColor(Color.parseColor(ImageHolder.getHeaderTextColor()));
+        try {
+            RelativeLayout rl = (RelativeLayout)findViewById(R.id.include);
+            rl.setBackgroundColor(Color.parseColor(ImageHolder.getHeaderColor()));
+        }
+        catch (Exception ex)
+        {
+
+        }
         if(getIntent().getExtras().getString("student_id") != null)
         {
             mStudentId = getIntent().getExtras().getString("student_id");
