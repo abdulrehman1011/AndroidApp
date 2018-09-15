@@ -21,6 +21,8 @@ import com.app.models.StudentList;
 import com.app.network.Services;
 import com.app.sessions.SessionManager;
 import com.google.gson.Gson;
+import com.onesignal.OSPermissionSubscriptionState;
+import com.onesignal.OneSignal;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -36,6 +38,8 @@ public class LoginActivity extends BaseActivity {
     FrameLayout overlay;
     private static String POPUP_CONSTANT = "mPopup";
     private static String POPUP_FORCE_SHOW_ICON = "setForceShowIcon";
+    private String mPlayerId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +49,8 @@ public class LoginActivity extends BaseActivity {
         mHeaderTitle.setText(getString(R.string.header_login));
         overlay = (FrameLayout) findViewById(R.id.progressBarHolder);
         ((ImageButton)findViewById(R.id.btn_notification)).setVisibility(View.GONE);
+        OSPermissionSubscriptionState status = OneSignal.getPermissionSubscriptionState();
+        mPlayerId = status.getSubscriptionStatus().getUserId();
         session = new SessionManager(getApplicationContext());
         if(!session.getValues("RECORDS").equals(""))
         {
@@ -135,7 +141,7 @@ public class LoginActivity extends BaseActivity {
         protected StudentList doInBackground(String... params) {
 
             service = new Services(mContext,getApplication());
-            stdObj = service.GetStudentList(mUserMobileNo.getText().toString().trim());
+            stdObj = service.GetStudentList(mUserMobileNo.getText().toString().trim(),mPlayerId);
             return stdObj;
         }
         @Override
@@ -149,8 +155,9 @@ public class LoginActivity extends BaseActivity {
                 session.addValues("USERID",mUserMobileNo.getText().toString().trim());
 
                 Intent i =  new Intent();
-                i.setClass(mContext, Home2Activity.class);
+                i.setClass(mContext, AttendanceActivity.class);
                 i.putExtra("LIST", stdObj);
+                //i.putExtra("student_id", result.getStudents().get(0).student_id);
                 finish();
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);

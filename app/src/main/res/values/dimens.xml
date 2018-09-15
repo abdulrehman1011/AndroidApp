@@ -14,7 +14,7 @@
     <dimen name="large_margin">20dp</dimen>
     <dimen name="zero_margin">0dp</dimen>
     <dimen name="logo_margin_top">100dp</dimen>
-    <dimen name="logo_margin_top_list">60dp</dimen>
+    <dimen name="logo_margin_top_list">20dp</dimen>
     <dimen name="list_row_height">60dp</dimen>
     <dimen name="list_margin">90dp</dimen>
     <dimen name="list_menu_margintop">50dp</dimen>

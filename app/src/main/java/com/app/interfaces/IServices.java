@@ -8,13 +8,14 @@ import com.app.models.StudentExamDetail;
 import com.app.models.StudentFee;
 import com.app.models.StudentFeeDetail;
 import com.app.models.StudentList;
+import com.app.models.StudentLogout;
 import com.app.models.StudentNotification;
 import com.app.models._StudentAttendance;
 import com.app.network.StudentExamService;
 
 public interface IServices {
 
-    public StudentList GetStudentList(String mobileNo);
+    public StudentList GetStudentList(String mobileNo, String id);
     public StudentDetail GetStudentDetail(String studentId);
     public StudentFee GetStudentFee(String studentId);
     public StudentFeeDetail GetStudentFeeMonthDetail(String studentId, String feeMonth);
@@ -23,4 +24,5 @@ public interface IServices {
     public _StudentAttendance GetStudentAttendance(String studentId);
     public StudentNotification GetStudentNotifications(String studentId);
     public SchoolProfile GetStudentSchoolProfile(String studentId);
+    public StudentLogout LogoutStudent(String id);
 }

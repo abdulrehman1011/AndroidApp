@@ -8,6 +8,7 @@ import com.app.models.StudentExamDetail;
 import com.app.models.StudentFee;
 import com.app.models.StudentFeeDetail;
 import com.app.models.StudentList;
+import com.app.models.StudentLogout;
 import com.app.models.StudentNotification;
 import com.app.models._StudentAttendance;
 
@@ -22,6 +23,9 @@ public interface APIInterface {
 
     @GET("/api/login?")
     Call<StudentList> getStudentList(@Query("mobile_number") String mobile_number,@Query("token") String token);
+
+    @GET("/api/login?")
+    Call<StudentLogout> logoutStudent(@Query("logout") String token);
 
     @GET("/api/student?")
     Call<StudentDetail> getStudentDetail(@Query("student_id") String student_id);
