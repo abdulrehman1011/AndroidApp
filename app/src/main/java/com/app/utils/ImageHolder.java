@@ -21,6 +21,7 @@ public class ImageHolder {
     private static String statusbarColor = "#FF0000";
     private static String redBtnUrl = "";
     private static String logoUrl = "";
+    private  static String sideMennuLogoBackgroundColor = "";
 
     public static String getHeaderTextColor() {
         return headerTextColor;
@@ -127,5 +128,13 @@ public class ImageHolder {
 
     public static void setLogoUrl(String logoUrl) {
         ImageHolder.logoUrl = logoUrl;
+    }
+
+    public static String getSideMennuLogoBackgroundColor() {
+        return sideMennuLogoBackgroundColor;
+    }
+
+    public static void setSideMennuLogoBackgroundColor(String sideMennuLogoBackgroundColor) {
+        ImageHolder.sideMennuLogoBackgroundColor = sideMennuLogoBackgroundColor;
     }
 }

@@ -242,6 +242,8 @@ public class IntroActivity extends AppCompatActivity
                 ImageHolder.setMenuTextColor(session.getValues("menuTextColor"));
                 ImageHolder.setStatusbarColor(session.getValues("statusBarColor"));
                 ImageHolder.setHeaderTextColor(session.getValues("headerTextColor"));
+                ImageHolder.setSideMennuLogoBackgroundColor(session.getValues("logobgcolor"));
+
             }
             catch (Exception ex)
             {

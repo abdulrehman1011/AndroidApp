@@ -111,7 +111,7 @@ public class Home2Activity extends AppCompatActivity
             //end
             //header nav
             View headerLayout = navigationView.getHeaderView(0);
-            headerLayout.setBackgroundColor(Color.parseColor(ImageHolder.getHeaderColor()));
+            headerLayout.setBackgroundColor(Color.parseColor(ImageHolder.getSideMennuLogoBackgroundColor()));
             mSideMenuLogo = (ImageView)headerLayout.findViewById(R.id.side_menu_logo) ;
             //end
             mLogoImage = (ImageView)findViewById(R.id.home_logo_image) ;

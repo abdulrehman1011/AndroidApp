@@ -36,6 +36,9 @@ public class Student implements Serializable
     @SerializedName("headerTextColor")
     @Expose
     private String headerTextColor;
+    @SerializedName("logobackgroundcolor")
+    @Expose
+    private String logobackgroundcolor;
 
     public String getHeaderTextColor() {
         return headerTextColor;
@@ -113,5 +116,13 @@ public class Student implements Serializable
 
     public void setStatusbarcolor(String statusbarcolor) {
         this.statusbarcolor = statusbarcolor;
+    }
+
+    public String getLogobackgroundcolor() {
+        return logobackgroundcolor;
+    }
+
+    public void setLogobackgroundcolor(String logobackgroundcolor) {
+        this.logobackgroundcolor = logobackgroundcolor;
     }
 }

@@ -209,6 +209,7 @@ public class LoginActivity extends BaseActivity {
                 ImageHolder.setMenuTextColor(stdObj.getStudents().get(0).getMenuTextColor());
                 ImageHolder.setStatusbarColor(stdObj.getStudents().get(0).getStatusbarcolor());
                 ImageHolder.setHeaderTextColor(stdObj.getStudents().get(0).getHeaderTextColor() == null?"#FF00000":stdObj.getStudents().get(0).getHeaderTextColor());
+                ImageHolder.setSideMennuLogoBackgroundColor(stdObj.getStudents().get(0).getLogobackgroundcolor());
             }
 
             return stdObj;
@@ -228,6 +229,7 @@ public class LoginActivity extends BaseActivity {
                 session.addValues("logo",result.getStudents().get(0).getLogoFolder()+"/"+screenDensity+"/logo.png");
                 session.addValues("redbtn",result.getStudents().get(0).getHomebuttoncolor()+"/"+screenDensity+"/button.png");
                 session.addValues("headerColor",result.getStudents().get(0).getHeadercolor());
+                session.addValues("logobgcolor",result.getStudents().get(0).getLogobackgroundcolor());
                 session.addValues("headerTextColor",result.getStudents().get(0).getHeaderTextColor()==null?"#FF00000":result.getStudents().get(0).getHeaderTextColor());
                 session.addValues("RECORDS",jsonInString);
                 session.addValues("USERID",mUserMobileNo.getText().toString().trim());
