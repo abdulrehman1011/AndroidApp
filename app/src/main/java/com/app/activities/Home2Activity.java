@@ -106,7 +106,7 @@ public class Home2Activity extends AppCompatActivity
                 {
 
                     Picasso.get().load(ImageHolder.getLogoUrl()).into(mLogoImage);
-                    Picasso.get().load(ImageHolder.getLogoUrl()).into(mSideMenuLogo);
+                   // Picasso.get().load(ImageHolder.getLogoUrl()).into(mSideMenuLogo);
                     //mLogoImage.setImageBitmap(ImageHolder.getBitmap("logo"));
                     //mSideMenuLogo.setImageBitmap(ImageHolder.getBitmap("logo"));
                 }
