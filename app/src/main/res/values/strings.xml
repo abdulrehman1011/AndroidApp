@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">OIGS</string>
+    <string name="app_name">MASTER</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -10,9 +10,9 @@
     <string name="menu_attendance">Attendance Record</string>
     <string name="menu_fee">Fee Record</string>
     <string name="menu_exam">Assessment Details</string>
-    <string name="header_intro">OIGS</string>
-    <string name="header_home">Am\'ly Family</string>
-    <string name="header_login">OIGS</string>
+    <string name="header_intro">MASTER</string>
+    <string name="header_home">MASTER</string>
+    <string name="header_login">MASTER</string>
     <string name="header_student">Home</string>
     <string name="header_profile">Profile</string>
     <string name="header_fee">Fee Month</string>
@@ -25,5 +25,5 @@
     <string name="master_main_screen_message">MASTER aims to revolutionize the educational practices in Pakistan with the
 help of technology, supportive teachers and schools.</string>
     <string name="title_activity_home2">Home2Activity</string>
-    <string name="website">www.oxbridgeschool.edu.pk/</string>
+    <string name="website">www.master.org.pk/</string>
 </resources>

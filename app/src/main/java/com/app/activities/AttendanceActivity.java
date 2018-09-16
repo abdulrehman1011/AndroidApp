@@ -314,7 +314,7 @@ public class AttendanceActivity extends BaseActivity {
                 }
                 mBtnPresent.setText(presentCount+" | Present");
                 mBtnAbsent.setText(absentCount+" | Absent");
-                presentDecorator = new PresentDecorator(Color.parseColor("#13691E"),presentDates);
+                presentDecorator = new PresentDecorator(Color.parseColor("#00e500"),presentDates);
                 absentDecorator = new AbsentDecorator(Color.RED,absentDates);
                 widget.addDecorators(
                         presentDecorator,absentDecorator

@@ -12,7 +12,7 @@
     <application
         android:name="com.app.activities.MyApplication"
         android:allowBackup="false"
-        android:icon="@drawable/logo"
+        android:icon="@drawable/logo_2"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
