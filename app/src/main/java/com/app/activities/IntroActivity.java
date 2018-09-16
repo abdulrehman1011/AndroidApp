@@ -1,6 +1,7 @@
 package com.app.activities;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -37,16 +38,14 @@ import com.app.network.Services;
 import com.app.sessions.SessionManager;
 import com.app.utils.ImageHolder;
 import com.google.gson.Gson;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+
 
 import java.io.File;
 
 import static android.support.constraint.Constraints.TAG;
 
 public class IntroActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, InternetConnectionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, InternetConnectionListener  {
     SessionManager session = null;
 
     @Override
@@ -72,6 +71,7 @@ public class IntroActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
+
 
  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 Window window = getWindow();
@@ -128,6 +128,8 @@ public class IntroActivity extends AppCompatActivity
 
 
     }
+
+
     public  boolean isStoragePermissionGranted() {
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)

@@ -1,5 +1,6 @@
 package com.app.activities;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -10,6 +11,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
@@ -35,16 +37,18 @@ import com.app.sessions.SessionManager;
 import com.app.utils.ImageHolder;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.onesignal.OSPermissionObserver;
+import com.onesignal.OSPermissionStateChanges;
 import com.onesignal.OSPermissionSubscriptionState;
 import com.onesignal.OneSignal;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import static com.app.activities.MyApplication.getContext;
 
-public class LoginActivity extends BaseActivity {
+
+public class LoginActivity extends BaseActivity  {
 
     private IServices service;
     private TextView mHeaderTitle;
@@ -67,6 +71,8 @@ public class LoginActivity extends BaseActivity {
         overlay = (FrameLayout) findViewById(R.id.progressBarHolder);
 
         density = getResources().getDisplayMetrics().density;
+        int aa= getResources().getDisplayMetrics().densityDpi;
+
         switch (getResources().getDisplayMetrics().densityDpi) {
             case DisplayMetrics.DENSITY_LOW:
                 screenDensity = "drawable-ldpi";
@@ -79,6 +85,9 @@ public class LoginActivity extends BaseActivity {
                 break;
             case DisplayMetrics.DENSITY_XHIGH:
                 screenDensity = "drawable-xhdpi";
+                break;
+            case DisplayMetrics.DENSITY_420:
+                screenDensity = "drawable-xxhdpi";
                 break;
             case DisplayMetrics.DENSITY_XXHIGH:
                 screenDensity = "drawable-xxhdpi";
@@ -123,6 +132,7 @@ public class LoginActivity extends BaseActivity {
         }
         ((ImageButton)findViewById(R.id.btn_notification)).setVisibility(View.GONE);
         OSPermissionSubscriptionState status = OneSignal.getPermissionSubscriptionState();
+
         mPlayerId = status.getSubscriptionStatus().getUserId();
         session = new SessionManager(getApplicationContext());
         if(!session.getValues("RECORDS").equals(""))
@@ -146,9 +156,20 @@ public class LoginActivity extends BaseActivity {
     }
 
     public void onClickLogin(View view) {
+
+
+        OSPermissionSubscriptionState status = OneSignal.getPermissionSubscriptionState();
+
+        mPlayerId = status.getSubscriptionStatus().getUserId();
+
         if(mUserMobileNo.getText().toString().trim().equals(""))
         {
-            Toast.makeText(this, "Plese enter your number !", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "Plese enter your number !", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(mPlayerId.trim().equals(""))
+        {
+            Toast.makeText(this, "Please wait device is registering !", Toast.LENGTH_LONG).show();
             return;
         }
         overlay.setVisibility(View.VISIBLE);
@@ -204,6 +225,9 @@ public class LoginActivity extends BaseActivity {
         });
         popup.show();
     }
+
+
+
     private class AsyncTaskRunner extends AsyncTask<String, String, StudentList> {
         private Context mContext;
 
@@ -230,12 +254,12 @@ public class LoginActivity extends BaseActivity {
            // Bitmap btnImage = imageLoader.loadImageSync(stdObj.getStudents().get(0).getHomebuttoncolor()+"/"+screenDensity+"/button.png");
            // ImageHolder.addBitmap(logo,"logo");
             //ImageHolder.addBitmap(btnImage,"redbtn");
-            if(stdObj.getStudents().size() > 0)
+            if(stdObj != null && stdObj.getStudents().size() > 0)
             {
 
-                String headerError = stdObj.getStudents().get(0).getHeadercolor();
-                headerError = headerError.replace("\r\n","");
-                stdObj.getStudents().get(0).setHeadercolor(headerError);
+                //String headerError = stdObj.getStudents().get(0).getHeadercolor();
+                //headerError = headerError.replace("\r\n","");
+                //stdObj.getStudents().get(0).setHeadercolor(headerError);
                 ImageHolder.setRedBtnUrl(stdObj.getStudents().get(0).getHomebuttoncolor()+"/"+screenDensity+"/button.png");
                 ImageHolder.setLogoUrl(stdObj.getStudents().get(0).getLogoFolder()+"/"+screenDensity+"/logo.png");
                 ImageHolder.setHeaderColor(stdObj.getStudents().get(0).getHeadercolor());

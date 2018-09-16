@@ -1,15 +1,8 @@
 package com.app.utils;
 
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-
-
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class ImageHolder {
     private static ImageHolder instance;

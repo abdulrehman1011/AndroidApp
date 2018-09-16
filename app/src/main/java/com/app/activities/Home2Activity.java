@@ -38,6 +38,7 @@ import com.app.models.Student;
 import com.app.models.StudentList;
 import com.app.sessions.SessionManager;
 import com.app.utils.ImageHolder;
+import com.onesignal.OneSignal;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -104,7 +105,7 @@ public class Home2Activity extends AppCompatActivity
                 mLogoImage = (ImageView)findViewById(R.id.home_logo_image) ;
                 if(!ImageHolder.getLogoUrl().equalsIgnoreCase(""))
                 {
-
+                    String pic = ImageHolder.getLogoUrl();
                     Picasso.get().load(ImageHolder.getLogoUrl()).into(mLogoImage);
                    // Picasso.get().load(ImageHolder.getLogoUrl()).into(mSideMenuLogo);
                     //mLogoImage.setImageBitmap(ImageHolder.getBitmap("logo"));
@@ -126,6 +127,7 @@ public class Home2Activity extends AppCompatActivity
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
                 window.setStatusBarColor(Color.parseColor(ImageHolder.getStatusbarColor()));
             }
+            OneSignal.clearOneSignalNotifications();
             session = new SessionManager(getApplicationContext());
             try {
                 list = (StudentList)getIntent().getExtras().getParcelable("LIST");
