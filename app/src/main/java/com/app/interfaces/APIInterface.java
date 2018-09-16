@@ -1,5 +1,6 @@
 package com.app.interfaces;
 
+import com.app.models.AppRateUrlModel;
 import com.app.models.SchoolProfile;
 import com.app.models.StudentAttendance;
 import com.app.models.StudentDetail;
@@ -54,4 +55,6 @@ public interface APIInterface {
     @GET("/api/Fee?")
     @Streaming
     Call<ResponseBody> getStudentFeeVoucher(@Query("std_id") String std_id, @Query("fee_month") String fee_month);
+    @GET("/api/student?")
+    Call<AppRateUrlModel> getRateURL(@Query("rate_url") String id);
 }

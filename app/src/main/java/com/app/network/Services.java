@@ -3,6 +3,7 @@ package com.app.network;
 import android.app.Application;
 import android.content.Context;
 
+import com.app.models.AppRateUrlModel;
 import com.app.models.SchoolProfile;
 import com.app.models.StudentAttendance;
 import com.app.models.StudentDetail;
@@ -155,6 +156,18 @@ public class Services implements com.app.interfaces.IServices{
             StudentLogoutService stdLogoutService = new StudentLogoutService(appObj);
             studentLogout = stdLogoutService.logoutStudent(id);
             return studentLogout;
+        }
+        catch (Exception ex)
+        {
+        }
+        return null;
+    }
+    @Override
+    public AppRateUrlModel GetAppRateURL(String id) {
+        try {
+            AppRateUrlService appRateUrlService = new AppRateUrlService(appObj);
+
+            return appRateUrlService.getRateUrl(id);
         }
         catch (Exception ex)
         {

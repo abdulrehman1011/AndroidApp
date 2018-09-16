@@ -151,7 +151,27 @@ public class Home2Activity extends AppCompatActivity
         } else if (id == R.id.nav_student_gallery) {
 
         } else if (id == R.id.nav_rateus) {
-            Uri uri = Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
+            try {
+            String rateUrl = session.getValues("rate_url");
+            if(!rateUrl.equalsIgnoreCase(""))
+            {
+
+
+                    Uri uri = Uri.parse(rateUrl);
+                    Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                    // To count with Play market backstack, After pressing back button,
+                    // to taken back to our application, we need to add following flags to intent.
+                    goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                            Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                            Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                    startActivity(goToMarket);
+
+            }
+            } catch (ActivityNotFoundException e) {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName())));
+            }
+            /*Uri uri = Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
             Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
             // To count with Play market backstack, After pressing back button,
             // to taken back to our application, we need to add following flags to intent.
@@ -163,7 +183,7 @@ public class Home2Activity extends AppCompatActivity
             } catch (ActivityNotFoundException e) {
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse("http://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName())));
-            }
+            }*/
 
         } else if (id == R.id.nav_logout) {
             AsyncTaskRunner runner = new AsyncTaskRunner(this);

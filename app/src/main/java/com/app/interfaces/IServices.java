@@ -1,5 +1,6 @@
 package com.app.interfaces;
 
+import com.app.models.AppRateUrlModel;
 import com.app.models.SchoolProfile;
 import com.app.models.StudentAttendance;
 import com.app.models.StudentDetail;
@@ -25,4 +26,5 @@ public interface IServices {
     public StudentNotification GetStudentNotifications(String studentId);
     public SchoolProfile GetStudentSchoolProfile(String studentId);
     public StudentLogout LogoutStudent(String id);
+    AppRateUrlModel GetAppRateURL(String id);
 }

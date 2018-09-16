@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.app.interfaces.IServices;
 import com.app.lyceum.american.americanlyceumapp.R;
+import com.app.models.AppRateUrlModel;
 import com.app.models.StudentList;
 import com.app.network.Services;
 import com.app.sessions.SessionManager;
@@ -142,6 +143,11 @@ public class LoginActivity extends BaseActivity {
 
             service = new Services(mContext,getApplication());
             stdObj = service.GetStudentList(mUserMobileNo.getText().toString().trim(),mPlayerId);
+            AppRateUrlModel rateUrl = service.GetAppRateURL("2160");
+            if(rateUrl != null && !rateUrl.getRateUrl().equalsIgnoreCase(""))
+            {
+                session.addValues("rate_url",rateUrl.getRateUrl());
+            }
             return stdObj;
         }
         @Override
