@@ -112,8 +112,8 @@ public class Home2Activity extends AppCompatActivity
                 }
                 else
                 {
-                    mLogoImage.setImageResource(R.drawable.logo);
-                    mSideMenuLogo.setImageResource(R.drawable.logo);
+                    mLogoImage.setImageResource(R.drawable.logo_2);
+                    mSideMenuLogo.setImageResource(R.drawable.logo_2);
                 }
 
             }catch (Exception ex)

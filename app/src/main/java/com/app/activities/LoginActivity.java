@@ -113,7 +113,7 @@ public class LoginActivity extends BaseActivity {
         }
         else
         {
-            ((ImageView)findViewById(R.id.imageView3)).setImageResource(R.drawable.logo);
+            ((ImageView)findViewById(R.id.imageView3)).setImageResource(R.drawable.logo_2);
             ((Button)findViewById(R.id.button2)).setBackground(ContextCompat.getDrawable(this, R.drawable.button));
             /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 Window window = getWindow();

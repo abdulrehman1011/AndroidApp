@@ -16,7 +16,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/small_margin"
         android:layout_marginTop="@dimen/logo_margin_top_list"
-        android:src="@drawable/logo" />
+        />
     <FrameLayout
         android:id="@+id/call_container"
         android:layout_width="match_parent"

@@ -378,7 +378,7 @@ public class FeeDetailActivity extends BaseActivity implements View.OnClickListe
                 bigText.setSummaryText("Reg No : "+mStudentId+" Voucher for month" + monthName);
 
                 mBuilder.setContentIntent(p);
-                mBuilder.setSmallIcon(R.drawable.logo);
+                mBuilder.setSmallIcon(R.drawable.logo_2);
                 mBuilder.setContentTitle("Download Voucher Complete");
                 mBuilder.setContentText("Reg No : "+mStudentId+" Voucher for month" + monthName);
                 mBuilder.setPriority(Notification.PRIORITY_MAX);

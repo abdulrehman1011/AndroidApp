@@ -18,7 +18,7 @@
         android:layout_below="@id/include"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/logo_margin_top_list"
-        android:src="@drawable/logo" />
+         />
 
     <LinearLayout
         android:id="@+id/login_container"

@@ -94,7 +94,7 @@ public class IntroActivity extends AppCompatActivity
         }
         else
         {
-            ((ImageView)findViewById(R.id.intro_logo)).setImageResource(R.drawable.logo);
+            ((ImageView)findViewById(R.id.intro_logo)).setImageResource(R.drawable.logo_2);
             ((Button)findViewById(R.id.backgroundImage)).setBackground(ContextCompat.getDrawable(this, R.drawable.button));
 
         }
