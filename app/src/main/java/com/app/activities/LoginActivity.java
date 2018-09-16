@@ -146,9 +146,17 @@ public class LoginActivity extends BaseActivity {
     }
 
     public void onClickLogin(View view) {
+        OSPermissionSubscriptionState status = OneSignal.getPermissionSubscriptionState();
+
+        mPlayerId = status.getSubscriptionStatus().getUserId();
         if(mUserMobileNo.getText().toString().trim().equals(""))
         {
             Toast.makeText(this, "Plese enter your number !", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(mPlayerId.trim().equals(""))
+        {
+            Toast.makeText(this, "Please wait device is registering !", Toast.LENGTH_LONG).show();
             return;
         }
         overlay.setVisibility(View.VISIBLE);
