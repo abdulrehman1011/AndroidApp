@@ -53,113 +53,110 @@ public class Home2Activity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home2);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_home);
-        //Drawable drawable = ContextCompat.getDrawable(getApplicationContext(),R.drawable.arrow_icon);
-        toolbar.setOverflowIcon(null);
-        toolbar.setContentInsetsAbsolute(0,0);
-        toolbar.setContentInsetStartWithNavigation(0);
-        toolbar.setBackgroundColor(Color.parseColor(ImageHolder.getHeaderColor()));
-        toolbar.setTitleTextColor(Color.parseColor(ImageHolder.getHeaderTextColor()));
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.parseColor(ImageHolder.getStatusbarColor()));
-        }
-
-        toolbar.setNavigationIcon(R.drawable.menu_icon);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_home);
-        navigationView.setNavigationItemSelectedListener(this);
-
-
-        navigationView.setItemIconTintList(null);
-        //Text color
-        int[][] state = new int[][] {
-                new int[] {-android.R.attr.state_enabled}, // disabled
-                new int[] {android.R.attr.state_enabled}, // enabled
-                new int[] {-android.R.attr.state_checked}, // unchecked
-                new int[] { android.R.attr.state_pressed}  // pressed
-
-        };
         try {
-            int color = Color.parseColor(ImageHolder.getMenuTextColor());
-            int[] colorList = new int[] {
-                    color,
-                    color,
-                    color,
-                    color
-            };
+            setContentView(R.layout.activity_home2);
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_home);
 
-            ColorStateList ColorStateList1 = new ColorStateList(state, colorList);
-            navigationView.setItemTextColor(ColorStateList1);
-            // end
-            //Set Item back ground
-            ColorDrawable cd = new ColorDrawable(Color.parseColor(ImageHolder.getMenuItemBgColor()));
+            //Drawable drawable = ContextCompat.getDrawable(getApplicationContext(),R.drawable.arrow_icon);
+            toolbar.setOverflowIcon(null);
+            toolbar.setContentInsetsAbsolute(0,0);
+            toolbar.setContentInsetStartWithNavigation(0);
+            String co = ImageHolder.getHeaderColor();
+            toolbar.setBackgroundColor(Color.parseColor(ImageHolder.getHeaderColor()));
+            toolbar.setTitleTextColor(Color.parseColor(ImageHolder.getHeaderTextColor()));
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawer.addDrawerListener(toggle);
+            toggle.syncState();
 
-            navigationView.setItemBackground(cd);
-            //end
-            //Set background
-            navigationView.setBackgroundColor(Color.parseColor(ImageHolder.getMenuMainBackgroundColor()));
-            //end
-            //header nav
-            View headerLayout = navigationView.getHeaderView(0);
-            headerLayout.setBackgroundColor(Color.parseColor(ImageHolder.getSideMennuLogoBackgroundColor()));
-            mSideMenuLogo = (ImageView)headerLayout.findViewById(R.id.side_menu_logo) ;
-            //end
-            mLogoImage = (ImageView)findViewById(R.id.home_logo_image) ;
-            if(!ImageHolder.getLogoUrl().equalsIgnoreCase(""))
+
+
+            toolbar.setNavigationIcon(R.drawable.menu_icon);
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_home);
+            navigationView.setNavigationItemSelectedListener(this);
+
+
+            navigationView.setItemIconTintList(null);
+            //Text color
+
+            try {
+
+                ColorStateList colorStateList = ColorStateList.valueOf(Color.parseColor(ImageHolder.getMenuTextColor()));
+
+                navigationView.setItemTextColor(colorStateList);
+                // end
+                //Set Item back ground
+                ColorDrawable cd = new ColorDrawable(Color.parseColor(ImageHolder.getMenuItemBgColor()));
+
+                navigationView.setItemBackground(cd);
+                //end
+                //Set background
+                navigationView.setBackgroundColor(Color.parseColor(ImageHolder.getMenuMainBackgroundColor()));
+                //end
+                //header nav
+                View headerLayout = navigationView.getHeaderView(0);
+                headerLayout.setBackgroundColor(Color.parseColor(ImageHolder.getSideMennuLogoBackgroundColor()));
+                mSideMenuLogo = (ImageView)headerLayout.findViewById(R.id.side_menu_logo) ;
+                //end
+                mLogoImage = (ImageView)findViewById(R.id.home_logo_image) ;
+                if(!ImageHolder.getLogoUrl().equalsIgnoreCase(""))
+                {
+
+                    Picasso.get().load(ImageHolder.getLogoUrl()).into(mLogoImage);
+                    Picasso.get().load(ImageHolder.getLogoUrl()).into(mSideMenuLogo);
+                    //mLogoImage.setImageBitmap(ImageHolder.getBitmap("logo"));
+                    //mSideMenuLogo.setImageBitmap(ImageHolder.getBitmap("logo"));
+                }
+                else
+                {
+                    mLogoImage.setImageResource(R.drawable.logo);
+                    mSideMenuLogo.setImageResource(R.drawable.logo);
+                }
+
+            }catch (Exception ex)
             {
 
-                Picasso.get().load(ImageHolder.getLogoUrl()).into(mLogoImage);
-                Picasso.get().load(ImageHolder.getLogoUrl()).into(mSideMenuLogo);
-                //mLogoImage.setImageBitmap(ImageHolder.getBitmap("logo"));
-                //mSideMenuLogo.setImageBitmap(ImageHolder.getBitmap("logo"));
-            }
-            else
-            {
-                mLogoImage.setImageResource(R.drawable.logo);
-                mSideMenuLogo.setImageResource(R.drawable.logo);
             }
 
-        }catch (Exception ex)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Window window = getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(Color.parseColor(ImageHolder.getStatusbarColor()));
+            }
+            session = new SessionManager(getApplicationContext());
+            try {
+                list = (StudentList)getIntent().getExtras().getParcelable("LIST");
+                if(list != null)
+                {
+                    StudentListAdapter adapter = new StudentListAdapter(list,this);
+                    studentList =(ListView)findViewById(R.id.listview_students);
+                    studentList.setAdapter(adapter);
+                    studentList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Student std = list.getStudents().get(position);
+                            Intent i =  new Intent();
+                            i.setClass(Home2Activity.this, StudentActivity.class);
+                            i.putExtra("student_id", std.getStudentId());
+                            startActivity(i);
+                            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                        }
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        catch ( Exception ex)
         {
 
         }
 
-
-        session = new SessionManager(getApplicationContext());
-        try {
-            list = (StudentList)getIntent().getExtras().getParcelable("LIST");
-            if(list != null)
-            {
-                StudentListAdapter adapter = new StudentListAdapter(list,this);
-                studentList =(ListView)findViewById(R.id.listview_students);
-                studentList.setAdapter(adapter);
-                studentList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Student std = list.getStudents().get(position);
-                        Intent i =  new Intent();
-                        i.setClass(Home2Activity.this, StudentActivity.class);
-                        i.putExtra("student_id", std.getStudentId());
-                        startActivity(i);
-                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-                    }
-                });
-            }
-        }
-        catch (Exception ex)
-        {
-
-        }
 
     }
 

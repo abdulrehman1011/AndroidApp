@@ -2,6 +2,7 @@ package com.app.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.hardware.camera2.TotalCaptureResult;
@@ -9,15 +10,19 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,11 +65,7 @@ public class LoginActivity extends BaseActivity {
         mHeaderTitle = (TextView) findViewById(R.id.tvHeaderTitle);
         mHeaderTitle.setText(getString(R.string.header_login));
         overlay = (FrameLayout) findViewById(R.id.progressBarHolder);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.RED);
-        }
+
         density = getResources().getDisplayMetrics().density;
         switch (getResources().getDisplayMetrics().densityDpi) {
             case DisplayMetrics.DENSITY_LOW:
@@ -87,12 +88,46 @@ public class LoginActivity extends BaseActivity {
                 break;
         }
         double d = getResources().getDisplayMetrics().density;
+        String app = getResources().getString(R.string.app_name);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Window window = getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(Color.parseColor("#000000"));
+                //ColorStateList colorStateList = ColorStateList.valueOf(Color.parseColor("#a05211"));
+                //mUserMobileNo.setBackgroundTintList(colorStateList);
+            }
+        if(app.equalsIgnoreCase("Master"))
+        {
+            ((ImageView)findViewById(R.id.imageView3)).setImageResource(R.drawable.logo_2);
+            ((Button)findViewById(R.id.button2)).setBackground(ContextCompat.getDrawable(this, R.drawable.button_2));
+            ((RelativeLayout)findViewById(R.id.include)).setBackgroundColor(Color.parseColor("#72d0ea"));
+            /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Window window = getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(Color.parseColor("#72d0ea"));
+                //ColorStateList colorStateList = ColorStateList.valueOf(Color.parseColor("#a05211"));
+                //mUserMobileNo.setBackgroundTintList(colorStateList);
+            }*/
+
+            //mUserMobileNo.setCursorVisible(true);
+        }
+        else
+        {
+            ((ImageView)findViewById(R.id.imageView3)).setImageResource(R.drawable.logo);
+            ((Button)findViewById(R.id.button2)).setBackground(ContextCompat.getDrawable(this, R.drawable.button));
+            /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Window window = getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(Color.RED);
+            }*/
+        }
         ((ImageButton)findViewById(R.id.btn_notification)).setVisibility(View.GONE);
         OSPermissionSubscriptionState status = OneSignal.getPermissionSubscriptionState();
         mPlayerId = status.getSubscriptionStatus().getUserId();
         session = new SessionManager(getApplicationContext());
         if(!session.getValues("RECORDS").equals(""))
         {
+
             Gson gson = new Gson();
             StudentList studentList = gson.fromJson(session.getValues("RECORDS"), StudentList.class);
             Intent i =  new Intent();
@@ -197,9 +232,9 @@ public class LoginActivity extends BaseActivity {
             //ImageHolder.addBitmap(btnImage,"redbtn");
             if(stdObj.getStudents().size() > 0)
             {
+
                 String headerError = stdObj.getStudents().get(0).getHeadercolor();
                 headerError = headerError.replace("\r\n","");
-                String hh = stdObj.getStudents().get(0).getHeaderTextColor();
                 stdObj.getStudents().get(0).setHeadercolor(headerError);
                 ImageHolder.setRedBtnUrl(stdObj.getStudents().get(0).getHomebuttoncolor()+"/"+screenDensity+"/button.png");
                 ImageHolder.setLogoUrl(stdObj.getStudents().get(0).getLogoFolder()+"/"+screenDensity+"/logo.png");

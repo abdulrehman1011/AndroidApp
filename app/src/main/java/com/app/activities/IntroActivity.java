@@ -26,6 +26,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.app.interfaces.InternetConnectionListener;
@@ -65,15 +67,37 @@ public class IntroActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         toggle.syncState();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.RED);
-        }
+
         toolbar.setNavigationIcon(null);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
+
+ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Window window = getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(Color.BLACK);
+            }
+
+        String app = getResources().getString(R.string.app_name);
+        if(app.equalsIgnoreCase("Master"))
+        {
+            ((ImageView)findViewById(R.id.intro_logo)).setImageResource(R.drawable.logo_2);
+            ((Button)findViewById(R.id.backgroundImage)).setBackground(ContextCompat.getDrawable(this, R.drawable.button_2));
+            toolbar.setBackgroundColor(Color.parseColor("#72d0ea"));
+           /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Window window = getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(Color.parseColor("#a05211"));
+            }*/
+
+        }
+        else
+        {
+            ((ImageView)findViewById(R.id.intro_logo)).setImageResource(R.drawable.logo);
+            ((Button)findViewById(R.id.backgroundImage)).setBackground(ContextCompat.getDrawable(this, R.drawable.button));
+
+        }
         ConnectivityManager cm = (ConnectivityManager) getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
         android.net.NetworkInfo wifi = cm
                 .getNetworkInfo(ConnectivityManager.TYPE_WIFI);

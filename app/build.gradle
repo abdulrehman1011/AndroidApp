@@ -9,7 +9,7 @@ android {
         versionCode 6
         versionName "1.1.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        setProperty("archivesBaseName", "American Lyceum")
+        setProperty("archivesBaseName", "OIGS")
         manifestPlaceholders = [onesignal_app_id               : "2ff340fb-ef8b-4353-977b-5e24e355f9fa",
                                 onesignal_google_project_number: "REMOTE"]
     }
@@ -20,7 +20,7 @@ android {
             signingConfig getSigningConfig()
             applicationVariants.all { variant ->
                 variant.outputs.all {
-                    outputFileName = "AmericanLyceum.apk"
+                    outputFileName = "OIGS.apk"
                 }
             }
         }
