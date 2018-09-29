@@ -2,10 +2,7 @@ package com.app.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.hardware.camera2.TotalCaptureResult;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -27,7 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.interfaces.IServices;
-import com.app.lyceum.american.americanlyceumapp.R;
+import com.app.master.R;
 import com.app.models.AppRateUrlModel;
 import com.app.models.StudentList;
 import com.app.network.Services;
@@ -35,8 +32,6 @@ import com.app.sessions.SessionManager;
 import com.app.utils.ImageHolder;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.onesignal.OSPermissionSubscriptionState;
 import com.onesignal.OneSignal;
 
@@ -67,6 +62,8 @@ public class LoginActivity extends BaseActivity {
         overlay = (FrameLayout) findViewById(R.id.progressBarHolder);
 
         density = getResources().getDisplayMetrics().density;
+        int aa= getResources().getDisplayMetrics().densityDpi;
+
         switch (getResources().getDisplayMetrics().densityDpi) {
             case DisplayMetrics.DENSITY_LOW:
                 screenDensity = "drawable-ldpi";
@@ -79,6 +76,9 @@ public class LoginActivity extends BaseActivity {
                 break;
             case DisplayMetrics.DENSITY_XHIGH:
                 screenDensity = "drawable-xhdpi";
+                break;
+            case DisplayMetrics.DENSITY_420:
+                screenDensity = "drawable-xxhdpi";
                 break;
             case DisplayMetrics.DENSITY_XXHIGH:
                 screenDensity = "drawable-xxhdpi";
@@ -224,7 +224,7 @@ public class LoginActivity extends BaseActivity {
 
             service = new Services(mContext,getApplication());
             stdObj = service.GetStudentList(mUserMobileNo.getText().toString().trim(), mPlayerId);
-            AppRateUrlModel rateUrl = service.GetAppRateURL("2160");
+            AppRateUrlModel rateUrl = service.GetAppRateURL(stdObj.getStudents().get(0).getStudentId());
             if(rateUrl != null && !rateUrl.getRateUrl().equalsIgnoreCase(""))
             {
                 session.addValues("rate_url",rateUrl.getRateUrl());
@@ -238,18 +238,20 @@ public class LoginActivity extends BaseActivity {
            // Bitmap btnImage = imageLoader.loadImageSync(stdObj.getStudents().get(0).getHomebuttoncolor()+"/"+screenDensity+"/button.png");
            // ImageHolder.addBitmap(logo,"logo");
             //ImageHolder.addBitmap(btnImage,"redbtn");
-            if(stdObj.getStudents().size() > 0)
+            if(stdObj != null && stdObj.getStudents().size() > 0)
             {
 
-                String headerError = stdObj.getStudents().get(0).getHeadercolor();
-                headerError = headerError.replace("\r\n","");
-                stdObj.getStudents().get(0).setHeadercolor(headerError);
+                //String headerError = stdObj.getStudents().get(0).getHeadercolor();
+                //headerError = headerError.replace("\r\n","");
+                //stdObj.getStudents().get(0).setHeadercolor(headerError);
+                String link = stdObj.getStudents().get(0).getLogoFolder()+"/"+screenDensity+"/logo.png";
                 ImageHolder.setRedBtnUrl(stdObj.getStudents().get(0).getHomebuttoncolor()+"/"+screenDensity+"/button.png");
                 ImageHolder.setLogoUrl(stdObj.getStudents().get(0).getLogoFolder()+"/"+screenDensity+"/logo.png");
                 ImageHolder.setHeaderColor(stdObj.getStudents().get(0).getHeadercolor());
                 ImageHolder.setMenuItemBgColor(stdObj.getStudents().get(0).getMenuItemBackgroundcolor());
                 ImageHolder.setMenuMainBackgroundColor(stdObj.getStudents().get(0).getMainBackgroundColor());
                 ImageHolder.setMenuTextColor(stdObj.getStudents().get(0).getMenuTextColor());
+                ImageHolder.setHeaderTitle(stdObj.getStudents().get(0).getSchool());
                 ImageHolder.setStatusbarColor(stdObj.getStudents().get(0).getStatusbarcolor());
                 ImageHolder.setHeaderTextColor(stdObj.getStudents().get(0).getHeaderTextColor() == null?"#FF00000":stdObj.getStudents().get(0).getHeaderTextColor());
                 ImageHolder.setSideMennuLogoBackgroundColor(stdObj.getStudents().get(0).getLogobackgroundcolor());
@@ -276,6 +278,7 @@ public class LoginActivity extends BaseActivity {
                 session.addValues("headerTextColor",result.getStudents().get(0).getHeaderTextColor()==null?"#FF00000":result.getStudents().get(0).getHeaderTextColor());
                 session.addValues("RECORDS",jsonInString);
                 session.addValues("USERID",mUserMobileNo.getText().toString().trim());
+                session.addValues("headertitle",result.getStudents().get(0).getSchool());
 
                 Intent i =  new Intent();
                 i.setClass(mContext, Home2Activity.class);

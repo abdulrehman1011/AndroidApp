@@ -1,17 +1,14 @@
 package com.app.adapters;
 
 import android.app.Activity;
-import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListAdapter;
 
-import com.app.lyceum.american.americanlyceumapp.R;
+import com.app.master.R;
 import com.app.models.FeeMonth;
-import com.app.models.Student;
 import com.app.models.StudentFee;
 
 public class StudentFeeAdapter extends ArrayAdapter<FeeMonth> {

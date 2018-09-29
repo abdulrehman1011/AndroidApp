@@ -1,15 +1,10 @@
 package com.app.utils;
 
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class ImageHolder {
     private static ImageHolder instance;
@@ -22,6 +17,7 @@ public class ImageHolder {
     private static String redBtnUrl = "";
     private static String logoUrl = "";
     private  static String sideMennuLogoBackgroundColor = "";
+    private  static String headerTitle = "";
 
     public static String getHeaderTextColor() {
         return headerTextColor;
@@ -136,5 +132,13 @@ public class ImageHolder {
 
     public static void setSideMennuLogoBackgroundColor(String sideMennuLogoBackgroundColor) {
         ImageHolder.sideMennuLogoBackgroundColor = sideMennuLogoBackgroundColor;
+    }
+
+    public static String getHeaderTitle() {
+        return headerTitle;
+    }
+
+    public static void setHeaderTitle(String headerTitle) {
+        ImageHolder.headerTitle = headerTitle;
     }
 }

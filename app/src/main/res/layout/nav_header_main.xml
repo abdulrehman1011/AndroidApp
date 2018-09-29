@@ -20,7 +20,6 @@
         android:layout_gravity="center_horizontal"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:layout_marginTop="@dimen/medium_margin"
-        android:background="@drawable/logo_2"
         android:scaleType="center"
          />
 

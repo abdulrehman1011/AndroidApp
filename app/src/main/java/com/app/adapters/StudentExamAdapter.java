@@ -6,9 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.TextView;
 
-import com.app.lyceum.american.americanlyceumapp.R;
+import com.app.master.R;
 import com.app.models.ExamType;
 import com.app.models.StudentExam;
 

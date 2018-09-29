@@ -1,9 +1,7 @@
 package com.app.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,10 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.adapters.StudentListAdapter;
-import com.app.lyceum.american.americanlyceumapp.R;
+import com.app.master.R;
 import com.app.models.Student;
 import com.app.models.StudentList;
-import com.app.sessions.SessionManager;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

@@ -11,6 +11,7 @@ import com.app.interfaces.InternetConnectionListener;
 import com.app.network.NetworkConnectionInterceptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.onesignal.OSPermissionSubscriptionState;
 import com.onesignal.OneSignal;
 
 import com.app.notifications.MyNotificationOpenedHandler;
@@ -41,6 +42,8 @@ public class MyApplication extends Application {
                 .setNotificationOpenedHandler(new MyNotificationOpenedHandler())
                 .setNotificationReceivedHandler( new MyNotificationReceivedHandler() )
                 .init();
+        OSPermissionSubscriptionState status = OneSignal.getPermissionSubscriptionState();
+        status.getSubscriptionStatus().getUserId();
     }
 
     public void setInternetConnectionListener(InternetConnectionListener listener) {

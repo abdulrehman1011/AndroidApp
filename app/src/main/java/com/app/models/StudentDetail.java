@@ -46,25 +46,25 @@ public class StudentDetail {
     private String _class;
     @SerializedName("Class_Fees")
     @Expose
-    private Integer classFees;
+    private String classFees;
     @SerializedName("Monthly_Fees")
     @Expose
-    private Integer monthlyFees;
+    private String monthlyFees;
     @SerializedName("Transport")
     @Expose
-    private Integer transport;
+    private String transport;
     @SerializedName("Security")
     @Expose
-    private Integer security;
+    private String security;
     @SerializedName("Admission_amount")
     @Expose
-    private Integer admissionAmount;
+    private String admissionAmount;
     @SerializedName("Admission_date")
     @Expose
     private String admissionDate;
     @SerializedName("Discount_amount")
     @Expose
-    private Integer discountAmount;
+    private String discountAmount;
     @SerializedName("Discount_comment")
     @Expose
     private String discountComment;
@@ -76,7 +76,7 @@ public class StudentDetail {
     private String allergy;
     @SerializedName("student_id_pk")
     @Expose
-    private Integer studentIdPk;
+    private String studentIdPk;
     @SerializedName("Remarks")
     @Expose
     private String remarks;
@@ -185,43 +185,43 @@ public class StudentDetail {
         this._class = _class;
     }
 
-    public Integer getClassFees() {
+    public String getClassFees() {
         return classFees;
     }
 
-    public void setClassFees(Integer classFees) {
+    public void setClassFees(String classFees) {
         this.classFees = classFees;
     }
 
-    public Integer getMonthlyFees() {
+    public String getMonthlyFees() {
         return monthlyFees;
     }
 
-    public void setMonthlyFees(Integer monthlyFees) {
+    public void setMonthlyFees(String monthlyFees) {
         this.monthlyFees = monthlyFees;
     }
 
-    public Integer getTransport() {
+    public String getTransport() {
         return transport;
     }
 
-    public void setTransport(Integer transport) {
+    public void setTransport(String transport) {
         this.transport = transport;
     }
 
-    public Integer getSecurity() {
+    public String getSecurity() {
         return security;
     }
 
-    public void setSecurity(Integer security) {
+    public void setSecurity(String security) {
         this.security = security;
     }
 
-    public Integer getAdmissionAmount() {
+    public String getAdmissionAmount() {
         return admissionAmount;
     }
 
-    public void setAdmissionAmount(Integer admissionAmount) {
+    public void setAdmissionAmount(String admissionAmount) {
         this.admissionAmount = admissionAmount;
     }
 
@@ -233,11 +233,11 @@ public class StudentDetail {
         this.admissionDate = admissionDate;
     }
 
-    public Integer getDiscountAmount() {
+    public String getDiscountAmount() {
         return discountAmount;
     }
 
-    public void setDiscountAmount(Integer discountAmount) {
+    public void setDiscountAmount(String discountAmount) {
         this.discountAmount = discountAmount;
     }
 
@@ -265,11 +265,11 @@ public class StudentDetail {
         this.allergy = allergy;
     }
 
-    public Integer getStudentIdPk() {
+    public String getStudentIdPk() {
         return studentIdPk;
     }
 
-    public void setStudentIdPk(Integer studentIdPk) {
+    public void setStudentIdPk(String studentIdPk) {
         this.studentIdPk = studentIdPk;
     }
 
