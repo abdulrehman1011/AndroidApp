@@ -3,11 +3,11 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.app.lyceum.american.americanlyceumapp"
+        applicationId "com.app.master"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 6
-        versionName "1.1.6"
+        versionCode 3
+        versionName "3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         setProperty("archivesBaseName", "MASTER")
         manifestPlaceholders = [onesignal_app_id               : "2ff340fb-ef8b-4353-977b-5e24e355f9fa",
@@ -38,6 +38,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:appcompat-v7:27.1.0'
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     testImplementation 'junit:junit:4.12'
@@ -57,7 +58,6 @@ dependencies {
     // Required for geotagging
     implementation "com.google.android.gms:play-services-location:+"
     implementation 'de.hdodenhof:circleimageview:2.2.0'
-    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     implementation 'com.squareup.picasso:picasso:2.71828'
 
 }

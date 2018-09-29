@@ -1,7 +1,6 @@
 package com.app.adapters;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.app.lyceum.american.americanlyceumapp.R;
+import com.app.master.R;
 import com.app.models.Student;
 import com.app.models.StudentList;
 import com.app.sessions.SessionManager;

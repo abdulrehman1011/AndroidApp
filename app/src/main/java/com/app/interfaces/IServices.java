@@ -9,6 +9,7 @@ import com.app.models.StudentExamDetail;
 import com.app.models.StudentFee;
 import com.app.models.StudentFeeDetail;
 import com.app.models.StudentList;
+import com.app.models.StudentLogout;
 import com.app.models.StudentNotification;
 import com.app.models._StudentAttendance;
 import com.app.network.StudentExamService;
@@ -25,4 +26,5 @@ public interface IServices {
     public StudentNotification GetStudentNotifications(String studentId);
     public SchoolProfile GetStudentSchoolProfile(String studentId);
     AppRateUrlModel GetAppRateURL(String id);
+    public StudentLogout LogoutStudent(String id);
 }

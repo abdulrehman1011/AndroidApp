@@ -4,14 +4,12 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -31,17 +29,12 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.app.interfaces.InternetConnectionListener;
-import com.app.lyceum.american.americanlyceumapp.R;
+import com.app.master.R;
 import com.app.models.StudentList;
-import com.app.network.Services;
 import com.app.sessions.SessionManager;
 import com.app.utils.ImageHolder;
 import com.google.gson.Gson;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
-import java.io.File;
 
 import static android.support.constraint.Constraints.TAG;
 
@@ -267,6 +260,7 @@ public class IntroActivity extends AppCompatActivity
                 ImageHolder.setStatusbarColor(session.getValues("statusBarColor"));
                 ImageHolder.setHeaderTextColor(session.getValues("headerTextColor"));
                 ImageHolder.setSideMennuLogoBackgroundColor(session.getValues("logobgcolor"));
+                ImageHolder.setHeaderTitle(session.getValues("headertitle"));
 
             }
             catch (Exception ex)
