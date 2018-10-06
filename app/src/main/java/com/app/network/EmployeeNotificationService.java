@@ -4,25 +4,23 @@ import android.app.Application;
 
 import com.app.activities.MyApplication;
 import com.app.interfaces.APIInterface;
-import com.app.models.AppRateUrlModel;
-import com.app.models.EmployeeList;
+import com.app.models.EmployeeNotification;
 
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class AppRateUrlService {
+public class EmployeeNotificationService {
     APIInterface apiInterface;
-    EmployeeList result;
-    public AppRateUrlService(Application app)
+    public EmployeeNotificationService(Application app)
     {
         apiInterface = ((MyApplication) app).getApiService();
     }
 
-    public AppRateUrlModel getRateUrl(String id)
+    public EmployeeNotification getEmployeeNotification(String studentId)
     {
-        Response<AppRateUrlModel> response = null;
+        Response<EmployeeNotification> response = null;
         try {
-            Call<AppRateUrlModel> call = apiInterface.getRateURL(id);
+            Call<EmployeeNotification> call = apiInterface.getStudentNotifications(studentId);
             response = call.execute();
         } catch (Exception e) {
             e.printStackTrace();

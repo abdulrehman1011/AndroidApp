@@ -11,9 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.adapters.StudentListAdapter;
-import com.app.master.R;
-import com.app.models.Student;
-import com.app.models.StudentList;
+import com.app.emp.R;
+import com.app.models.Employee;
+import com.app.models.EmployeeList;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -21,16 +21,16 @@ import java.lang.reflect.Method;
 public class HomeActivity extends BaseActivity {
     private TextView mHeaderTitle;
     ListView studentList;
-    StudentList list;
+    EmployeeList list;
     private static String POPUP_CONSTANT = "mPopup";
     private static String POPUP_FORCE_SHOW_ICON = "setForceShowIcon";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        list = (StudentList)getIntent().getExtras().getParcelable("LIST");
+        list = (EmployeeList)getIntent().getExtras().getParcelable("LIST");
         mHeaderTitle = (TextView) findViewById(R.id.tvHeaderTitle);
-        mHeaderTitle.setText(getString(R.string.header_home));
+        //mHeaderTitle.setText(getString(R.string.header_home));
         if(list != null)
         {
             StudentListAdapter adapter = new StudentListAdapter(list,this);
@@ -39,7 +39,7 @@ public class HomeActivity extends BaseActivity {
             studentList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Student std = list.getStudents().get(position);
+                    Employee std = list.getEmployees().get(position);
                     Intent i =  new Intent();
                     i.setClass(HomeActivity.this, StudentActivity.class);
                     i.putExtra("student_id", std.getStudentId());

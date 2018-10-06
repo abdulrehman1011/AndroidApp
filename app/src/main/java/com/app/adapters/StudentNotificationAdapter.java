@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.app.master.R;
+import com.app.emp.R;
 import com.app.models.Notify;
-import com.app.models.StudentNotification;
+import com.app.models.EmployeeNotification;
 import com.app.utils.Util;
 
 import java.text.SimpleDateFormat;
@@ -18,12 +18,12 @@ import java.util.Date;
 
 
 public class StudentNotificationAdapter extends ArrayAdapter<Notify> {
-    private StudentNotification dataSet;
+    private EmployeeNotification dataSet;
     private final Activity mContext;
 
 
 
-    public StudentNotificationAdapter(StudentNotification data, Activity context) {
+    public StudentNotificationAdapter(EmployeeNotification data, Activity context) {
         super(context, R.layout.notification_layout, data.getNotify());
         this.dataSet = data;
         this.mContext=context;

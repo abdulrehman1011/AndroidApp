@@ -8,24 +8,24 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.app.master.R;
-import com.app.models.Student;
-import com.app.models.StudentList;
+import com.app.emp.R;
+import com.app.models.Employee;
+import com.app.models.EmployeeList;
 import com.app.sessions.SessionManager;
 import com.app.utils.ImageHolder;
 import com.squareup.picasso.Picasso;
 
-public class StudentListAdapter extends ArrayAdapter<Student>{
+public class StudentListAdapter extends ArrayAdapter<Employee>{
 
-    private StudentList dataSet;
+    private EmployeeList dataSet;
     private final Activity mContext;
     SessionManager session;
     private static class ViewHolder {
-        TextView studentName;
+        TextView EmployeeName;
 
     }
-    public StudentListAdapter(StudentList data, Activity context) {
-        super(context, R.layout.row_item, data.getStudents());
+    public StudentListAdapter(EmployeeList data, Activity context) {
+        super(context, R.layout.row_item, data.getEmployees());
         this.dataSet = data;
         this.mContext=context;
         session = new SessionManager(context);
@@ -36,7 +36,7 @@ public class StudentListAdapter extends ArrayAdapter<Student>{
         View rowView=inflater.inflate(R.layout.row_item, null,true);
 
         TextView titleText = (TextView) rowView.findViewById(R.id.list_item_text);
-        titleText.setText(dataSet.getStudents().get(position).getStudentName());
+        titleText.setText(dataSet.getEmployees().get(position).getStudentName());
 
         ImageView imageBg = (ImageView) rowView.findViewById(R.id.student_row_item_image);
         //Bitmap bmp = ImageHolder.getBitmap("redbtn");

@@ -29,8 +29,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.app.interfaces.InternetConnectionListener;
-import com.app.master.R;
-import com.app.models.StudentList;
+import com.app.emp.R;
+import com.app.models.EmployeeList;
 import com.app.sessions.SessionManager;
 import com.app.utils.ImageHolder;
 import com.google.gson.Gson;
@@ -73,7 +73,7 @@ public class IntroActivity extends AppCompatActivity
             }
 
         String app = getResources().getString(R.string.app_name);
-        if(app.equalsIgnoreCase("Master"))
+        if(app.equalsIgnoreCase("MASTER ATTENDANCE"))
         {
             ((ImageView)findViewById(R.id.intro_logo)).setImageResource(R.drawable.logo_2);
             ((Button)findViewById(R.id.backgroundImage)).setBackground(ContextCompat.getDrawable(this, R.drawable.button_2));
@@ -269,7 +269,7 @@ public class IntroActivity extends AppCompatActivity
             }
 
             Gson gson = new Gson();
-            StudentList studentList = gson.fromJson(session.getValues("RECORDS"), StudentList.class);
+            EmployeeList studentList = gson.fromJson(session.getValues("RECORDS"), EmployeeList.class);
             Intent i =  new Intent();
             i.setClass(getApplicationContext(), Home2Activity.class);
             i.putExtra("LIST", studentList);

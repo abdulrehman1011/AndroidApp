@@ -24,9 +24,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.interfaces.IServices;
-import com.app.master.R;
+import com.app.emp.R;
 import com.app.models.AppRateUrlModel;
-import com.app.models.StudentList;
+import com.app.models.Employee;
+import com.app.models.EmployeeList;
 import com.app.network.Services;
 import com.app.sessions.SessionManager;
 import com.app.utils.ImageHolder;
@@ -44,7 +45,7 @@ public class LoginActivity extends BaseActivity {
     private IServices service;
     private TextView mHeaderTitle;
     private EditText mUserMobileNo;
-    private StudentList stdObj;
+    private EmployeeList stdObj;
     private String mPlayerId;
     SessionManager session = null;
     FrameLayout overlay;
@@ -96,7 +97,7 @@ public class LoginActivity extends BaseActivity {
                 //ColorStateList colorStateList = ColorStateList.valueOf(Color.parseColor("#a05211"));
                 //mUserMobileNo.setBackgroundTintList(colorStateList);
             }
-        if(app.equalsIgnoreCase("Master"))
+        if(app.equalsIgnoreCase("MASTER ATTENDANCE"))
         {
             ((ImageView)findViewById(R.id.imageView3)).setImageResource(R.drawable.logo_2);
             ((Button)findViewById(R.id.button2)).setBackground(ContextCompat.getDrawable(this, R.drawable.button_2));
@@ -129,7 +130,7 @@ public class LoginActivity extends BaseActivity {
         {
 
             Gson gson = new Gson();
-            StudentList studentList = gson.fromJson(session.getValues("RECORDS"), StudentList.class);
+            EmployeeList studentList = gson.fromJson(session.getValues("RECORDS"), EmployeeList.class);
             Intent i =  new Intent();
             i.setClass(this, Home2Activity.class);
             i.putExtra("LIST", studentList);
@@ -212,7 +213,7 @@ public class LoginActivity extends BaseActivity {
         });
         popup.show();
     }
-    private class AsyncTaskRunner extends AsyncTask<String, String, StudentList> {
+    private class AsyncTaskRunner extends AsyncTask<String, String, EmployeeList> {
         private Context mContext;
 
         public AsyncTaskRunner (Context context){
@@ -220,11 +221,11 @@ public class LoginActivity extends BaseActivity {
         }
 
         @Override
-        protected StudentList doInBackground(String... params) {
+        protected EmployeeList doInBackground(String... params) {
 
             service = new Services(mContext,getApplication());
             stdObj = service.GetStudentList(mUserMobileNo.getText().toString().trim(), mPlayerId);
-            AppRateUrlModel rateUrl = service.GetAppRateURL(stdObj.getStudents().get(0).getStudentId());
+            AppRateUrlModel rateUrl = service.GetAppRateURL(stdObj.getEmployees().get(0).getStudentId());
             if(rateUrl != null && !rateUrl.getRateUrl().equalsIgnoreCase(""))
             {
                 session.addValues("rate_url",rateUrl.getRateUrl());
@@ -238,47 +239,47 @@ public class LoginActivity extends BaseActivity {
            // Bitmap btnImage = imageLoader.loadImageSync(stdObj.getStudents().get(0).getHomebuttoncolor()+"/"+screenDensity+"/button.png");
            // ImageHolder.addBitmap(logo,"logo");
             //ImageHolder.addBitmap(btnImage,"redbtn");
-            if(stdObj != null && stdObj.getStudents().size() > 0)
+            if(stdObj != null && stdObj.getEmployees().size() > 0)
             {
 
                 //String headerError = stdObj.getStudents().get(0).getHeadercolor();
                 //headerError = headerError.replace("\r\n","");
                 //stdObj.getStudents().get(0).setHeadercolor(headerError);
-                String link = stdObj.getStudents().get(0).getLogoFolder()+"/"+screenDensity+"/logo.png";
-                ImageHolder.setRedBtnUrl(stdObj.getStudents().get(0).getHomebuttoncolor()+"/"+screenDensity+"/button.png");
-                ImageHolder.setLogoUrl(stdObj.getStudents().get(0).getLogoFolder()+"/"+screenDensity+"/logo.png");
-                ImageHolder.setHeaderColor(stdObj.getStudents().get(0).getHeadercolor());
-                ImageHolder.setMenuItemBgColor(stdObj.getStudents().get(0).getMenuItemBackgroundcolor());
-                ImageHolder.setMenuMainBackgroundColor(stdObj.getStudents().get(0).getMainBackgroundColor());
-                ImageHolder.setMenuTextColor(stdObj.getStudents().get(0).getMenuTextColor());
-                ImageHolder.setHeaderTitle(stdObj.getStudents().get(0).getSchool());
-                ImageHolder.setStatusbarColor(stdObj.getStudents().get(0).getStatusbarcolor());
-                ImageHolder.setHeaderTextColor(stdObj.getStudents().get(0).getHeaderTextColor() == null?"#FF00000":stdObj.getStudents().get(0).getHeaderTextColor());
-                ImageHolder.setSideMennuLogoBackgroundColor(stdObj.getStudents().get(0).getLogobackgroundcolor());
+                String link = stdObj.getEmployees().get(0).getLogoFolder()+"/"+screenDensity+"/logo.png";
+                ImageHolder.setRedBtnUrl(stdObj.getEmployees().get(0).getHomebuttoncolor()+"/"+screenDensity+"/button.png");
+                ImageHolder.setLogoUrl(stdObj.getEmployees().get(0).getLogoFolder()+"/"+screenDensity+"/logo.png");
+                ImageHolder.setHeaderColor(stdObj.getEmployees().get(0).getHeadercolor());
+                ImageHolder.setMenuItemBgColor(stdObj.getEmployees().get(0).getMenuItemBackgroundcolor());
+                ImageHolder.setMenuMainBackgroundColor(stdObj.getEmployees().get(0).getMainBackgroundColor());
+                ImageHolder.setMenuTextColor(stdObj.getEmployees().get(0).getMenuTextColor());
+                ImageHolder.setHeaderTitle(stdObj.getEmployees().get(0).getSchool());
+                ImageHolder.setStatusbarColor(stdObj.getEmployees().get(0).getStatusbarcolor());
+                ImageHolder.setHeaderTextColor(stdObj.getEmployees().get(0).getHeaderTextColor() == null?"#FF00000":stdObj.getEmployees().get(0).getHeaderTextColor());
+                ImageHolder.setSideMennuLogoBackgroundColor(stdObj.getEmployees().get(0).getLogobackgroundcolor());
             }
 
             return stdObj;
         }
         @Override
-        protected void onPostExecute(StudentList result) {
-            if(result != null && result.getStudents().size() > 0)
+        protected void onPostExecute(EmployeeList result) {
+            if(result != null && result.getEmployees().size() > 0)
             {
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.serializeNulls();
                 Gson gson = gsonBuilder.create();
                 String jsonInString = gson.toJson(result);
-                session.addValues("menuItemBackgroundColor",result.getStudents().get(0).getMenuItemBackgroundcolor());
-                session.addValues("menuTextColor",result.getStudents().get(0).getMenuTextColor());
-                session.addValues("MainBackgroundColor",result.getStudents().get(0).getMainBackgroundColor());
-                session.addValues("statusBarColor",result.getStudents().get(0).getStatusbarcolor());
-                session.addValues("logo",result.getStudents().get(0).getLogoFolder()+"/"+screenDensity+"/logo.png");
-                session.addValues("redbtn",result.getStudents().get(0).getHomebuttoncolor()+"/"+screenDensity+"/button.png");
-                session.addValues("headerColor",result.getStudents().get(0).getHeadercolor());
-                session.addValues("logobgcolor",result.getStudents().get(0).getLogobackgroundcolor());
-                session.addValues("headerTextColor",result.getStudents().get(0).getHeaderTextColor()==null?"#FF00000":result.getStudents().get(0).getHeaderTextColor());
+                session.addValues("menuItemBackgroundColor",result.getEmployees().get(0).getMenuItemBackgroundcolor());
+                session.addValues("menuTextColor",result.getEmployees().get(0).getMenuTextColor());
+                session.addValues("MainBackgroundColor",result.getEmployees().get(0).getMainBackgroundColor());
+                session.addValues("statusBarColor",result.getEmployees().get(0).getStatusbarcolor());
+                session.addValues("logo",result.getEmployees().get(0).getLogoFolder()+"/"+screenDensity+"/logo.png");
+                session.addValues("redbtn",result.getEmployees().get(0).getHomebuttoncolor()+"/"+screenDensity+"/button.png");
+                session.addValues("headerColor",result.getEmployees().get(0).getHeadercolor());
+                session.addValues("logobgcolor",result.getEmployees().get(0).getLogobackgroundcolor());
+                session.addValues("headerTextColor",result.getEmployees().get(0).getHeaderTextColor()==null?"#FF00000":result.getEmployees().get(0).getHeaderTextColor());
                 session.addValues("RECORDS",jsonInString);
                 session.addValues("USERID",mUserMobileNo.getText().toString().trim());
-                session.addValues("headertitle",result.getStudents().get(0).getSchool());
+                session.addValues("headertitle",result.getEmployees().get(0).getSchool());
 
                 Intent i =  new Intent();
                 i.setClass(mContext, Home2Activity.class);

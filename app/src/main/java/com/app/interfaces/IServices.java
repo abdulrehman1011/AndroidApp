@@ -1,30 +1,28 @@
 package com.app.interfaces;
 
 import com.app.models.AppRateUrlModel;
+import com.app.models.EmployeeList;
 import com.app.models.SchoolProfile;
-import com.app.models.StudentAttendance;
-import com.app.models.StudentDetail;
+import com.app.models.EmployeeDetail;
 import com.app.models.StudentExam;
 import com.app.models.StudentExamDetail;
 import com.app.models.StudentFee;
 import com.app.models.StudentFeeDetail;
-import com.app.models.StudentList;
-import com.app.models.StudentLogout;
-import com.app.models.StudentNotification;
-import com.app.models._StudentAttendance;
-import com.app.network.StudentExamService;
+import com.app.models.EmployeeLogout;
+import com.app.models.EmployeeNotification;
+import com.app.models._EmployeeAttendance;
 
 public interface IServices {
 
-    public StudentList GetStudentList(String mobileNo, String playerId);
-    public StudentDetail GetStudentDetail(String studentId);
+    public EmployeeList GetStudentList(String mobileNo, String playerId);
+    public EmployeeDetail GetStudentDetail(String studentId);
     public StudentFee GetStudentFee(String studentId);
     public StudentFeeDetail GetStudentFeeMonthDetail(String studentId, String feeMonth);
     public StudentExam GetStudentExams(String studentId);
     public StudentExamDetail GetStudentExamsDetails(String studentId, int semester);
-    public _StudentAttendance GetStudentAttendance(String studentId);
-    public StudentNotification GetStudentNotifications(String studentId);
+    public _EmployeeAttendance GetStudentAttendance(String studentId);
+    public EmployeeNotification GetStudentNotifications(String studentId);
     public SchoolProfile GetStudentSchoolProfile(String studentId);
     AppRateUrlModel GetAppRateURL(String id);
-    public StudentLogout LogoutStudent(String id);
+    public EmployeeLogout LogoutStudent(String id);
 }

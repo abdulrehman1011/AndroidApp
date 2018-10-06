@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.app.master">
+    package="com.app.emp">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -44,19 +44,6 @@
             android:name="com.app.activities.AttendanceActivity"
             android:theme="@style/AppTheme1" />
         <activity
-            android:name="com.app.activities.ExamActivity"
-            android:theme="@style/AppTheme1" />
-        <activity
-            android:name="com.app.activities.FeeActivity"
-            android:theme="@style/AppTheme1" />
-        <activity
-            android:name="com.app.activities.FeeDetailActivity"
-            android:theme="@style/AppTheme1"
-            android:exported="true"/>
-        <activity
-            android:name="com.app.activities.ExamDetailActivity"
-            android:theme="@style/AppTheme1" />
-        <activity
             android:name="com.app.activities.StudentDetailsActivity"
             android:theme="@style/AppTheme1" />
         <activity android:theme="@style/AppTheme1" android:name="com.app.activities.NotificationActivity" />
@@ -73,7 +60,7 @@
         <activity android:name="com.app.activities.BaseActivity" />
         <activity
             android:name="com.app.activities.Home2Activity"
-            android:label="@string/header_home"
+
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

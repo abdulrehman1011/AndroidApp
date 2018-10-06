@@ -1,32 +1,36 @@
 package com.app.network;
 
+
 import android.app.Application;
 
 import com.app.activities.MyApplication;
 import com.app.interfaces.APIInterface;
-import com.app.models.AppRateUrlModel;
 import com.app.models.EmployeeList;
+
 
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class AppRateUrlService {
+public class EmployeeServices {
+
+
     APIInterface apiInterface;
     EmployeeList result;
-    public AppRateUrlService(Application app)
+    public EmployeeServices(Application app)
     {
         apiInterface = ((MyApplication) app).getApiService();
     }
 
-    public AppRateUrlModel getRateUrl(String id)
+    public EmployeeList getEmployees(String mobileno, String playerId)
     {
-        Response<AppRateUrlModel> response = null;
+        Response<EmployeeList> response = null;
         try {
-            Call<AppRateUrlModel> call = apiInterface.getRateURL(id);
+            Call<EmployeeList> call = apiInterface.getStudentList(mobileno,playerId);
             response = call.execute();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return response == null? null:response.body();
     }
+
 }

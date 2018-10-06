@@ -1,19 +1,15 @@
 package com.app.activities;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.app.interfaces.InternetConnectionListener;
-import com.app.master.R;
 import com.app.utils.ImageHolder;
 
 public class BaseActivity extends Activity implements InternetConnectionListener {

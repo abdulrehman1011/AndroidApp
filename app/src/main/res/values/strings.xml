@@ -1,19 +1,15 @@
 <resources>
-    <string name="app_name">MASTER</string>
+    <string name="app_name">MASTER Attendance</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    <string name="menu_profile">Student Profile</string>
+    <string name="menu_profile">Employee Profile</string>
     <string name="menu_attendance">Attendance Record</string>
     <string name="menu_fee">Fee Record</string>
     <string name="menu_exam">Assessment Details</string>
-    <string name="header_intro">MASTER</string>
-    <string name="header_home">MASTER</string>
-    <string name="header_login">MASTER</string>
-    <string name="header_student">Home</string>
+    <string name="header_home">MASTER ATTENDANCE</string>
+    <string name="header_login">MASTER ATTENDANCE</string>
     <string name="header_profile">Profile</string>
     <string name="header_fee">Fee Month</string>
     <string name="header_notification">Notifications</string>
@@ -21,9 +17,7 @@
     <string name="header_exam"> - Assessments</string>
     <string name="header_attendance">Attendance</string>
     <string name="header_school_detail">School Details</string>
-    <string name="main_screen_message">At Oxbridge International Grammar School, we offer an exclusive program of high speculative standards with a strong emphasis on character-building. Our aim is to provide children with an excellent learning environment where they have an opportunity to develop skills and Islamic values needed to become firm believers, who seek excellence in all their endeavors. The faculty is integral in creating an atmosphere conducive for learning, while developing and nurturing the sense of wonder that all children are born with.</string>
     <string name="master_main_screen_message">MASTER aims to revolutionize the educational practices in Pakistan with the
 help of technology, supportive teachers and schools.</string>
-    <string name="title_activity_home2">Home2Activity</string>
     <string name="website">www.master.org.pk/</string>
 </resources>

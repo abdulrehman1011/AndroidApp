@@ -18,13 +18,13 @@ import android.widget.Toast;
 
 import com.app.adapters.StudentNotificationAdapter;
 import com.app.interfaces.IServices;
-import com.app.master.R;
+import com.app.emp.R;
+import com.app.models.EmployeeList;
 import com.app.models.Notify;
-import com.app.models.StudentList;
-import com.app.models.StudentLogout;
-import com.app.models.StudentNotification;
+import com.app.models.EmployeeLogout;
+import com.app.models.EmployeeNotification;
 import com.app.network.Services;
-import com.app.network.StudentNotificationService;
+import com.app.network.EmployeeNotificationService;
 import com.app.sessions.SessionManager;
 import com.app.utils.ImageHolder;
 import com.google.gson.Gson;
@@ -135,7 +135,7 @@ public class NotificationActivity extends BaseActivity {
                         if(!session.getValues("RECORDS").equals(""))
                         {
                             Gson gson = new Gson();
-                            StudentList studentList = gson.fromJson(session.getValues("RECORDS"), StudentList.class);
+                            EmployeeList studentList = gson.fromJson(session.getValues("RECORDS"), EmployeeList.class);
                             Intent i =  new Intent();
                             i.setClass(getApplicationContext(), Home2Activity.class);
                             i.putExtra("LIST", studentList);
@@ -155,7 +155,7 @@ public class NotificationActivity extends BaseActivity {
         });
         popup.show();
     }
-    private class AsyncTaskRunner extends AsyncTask<String, String, StudentNotification> {
+    private class AsyncTaskRunner extends AsyncTask<String, String, EmployeeNotification> {
         private Context mContext;
 
         public AsyncTaskRunner (Context context){
@@ -163,14 +163,14 @@ public class NotificationActivity extends BaseActivity {
         }
 
         @Override
-        protected StudentNotification doInBackground(String... params) {
-            StudentNotification stdObj;
-            StudentNotificationService service = new StudentNotificationService(getApplication());
-            stdObj = service.getStudentNotification(mStudentId);
+        protected EmployeeNotification doInBackground(String... params) {
+            EmployeeNotification stdObj;
+            EmployeeNotificationService service = new EmployeeNotificationService(getApplication());
+            stdObj = service.getEmployeeNotification(mStudentId);
             return stdObj;
         }
         @Override
-        protected void onPostExecute(StudentNotification result) {
+        protected void onPostExecute(EmployeeNotification result) {
             if(result != null)
             {
                 notificationList= result.getNotify();
@@ -197,7 +197,7 @@ public class NotificationActivity extends BaseActivity {
 
         }
     }
-    private class AsyncLogoutTaskRunner extends AsyncTask<String, String, StudentLogout> {
+    private class AsyncLogoutTaskRunner extends AsyncTask<String, String, EmployeeLogout> {
         private Context mContext;
         IServices service;
         public AsyncLogoutTaskRunner (Context context){
@@ -205,9 +205,9 @@ public class NotificationActivity extends BaseActivity {
         }
 
         @Override
-        protected StudentLogout doInBackground(String... params) {
+        protected EmployeeLogout doInBackground(String... params) {
 
-            StudentLogout stdObj;
+            EmployeeLogout stdObj;
             service = new Services(mContext,getApplication());
             OSPermissionSubscriptionState status = OneSignal.getPermissionSubscriptionState();
             String mPlayerId = status.getSubscriptionStatus().getUserId();
@@ -215,7 +215,7 @@ public class NotificationActivity extends BaseActivity {
             return stdObj;
         }
         @Override
-        protected void onPostExecute(StudentLogout result) {
+        protected void onPostExecute(EmployeeLogout result) {
             if(result != null && result.getLogout().equalsIgnoreCase("true"))
             {
                 SessionManager session = new SessionManager(getApplicationContext());

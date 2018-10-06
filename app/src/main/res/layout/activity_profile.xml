@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/profile_horizontal_margin"
             android:layout_weight="@dimen/profile_textview_weight"
-            android:text="Student Name"
+            android:text="Employee Name"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="@dimen/profile_textview_fontsize" />
@@ -83,10 +83,10 @@
             android:textSize="@dimen/profile_textview_fontsize"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:text="Mother Name" />
+            android:text="Contact" />
 
         <TextView
-            android:id="@+id/mother_name"
+            android:id="@+id/whatsappno"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/profile_horizontal_margin"
@@ -104,10 +104,10 @@
             android:textSize="@dimen/profile_textview_fontsize"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:text="Present Class" />
+            android:text="CNIC" />
 
         <TextView
-            android:id="@+id/present_class"
+            android:id="@+id/cnic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/profile_horizontal_margin"
@@ -125,10 +125,10 @@
             android:textSize="@dimen/profile_textview_fontsize"
             android:textStyle="bold"
 
-            android:text="Father Contact No" />
+            android:text="Gender" />
 
         <TextView
-            android:id="@+id/contact"
+            android:id="@+id/gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/profile_horizontal_margin"
@@ -145,9 +145,9 @@
             android:textStyle="bold"
             android:layout_weight="@dimen/profile_textview_weight"
             android:textSize="@dimen/profile_textview_fontsize"
-            android:text="Address" />
+            android:text="Designation" />
         <TextView
-            android:id="@+id/address"
+            android:id="@+id/designation"
             android:layout_width="match_parent"
             android:layout_marginHorizontal="@dimen/profile_horizontal_margin"
             android:layout_weight="0.3"

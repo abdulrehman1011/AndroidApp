@@ -49,6 +49,7 @@
             android:layout_height="wrap_content"
             android:text="@string/menu_exam"
             android:onClick="onClickExam"
+            android:visibility="gone"
             android:layout_marginVertical="@dimen/medium_margin"
             android:textColor="@color/black"
 
@@ -59,6 +60,7 @@
             android:layout_height="wrap_content"
             android:text="@string/menu_fee"
             android:onClick="onClickFee"
+            android:visibility="gone"
             android:textColor="@color/black"
             android:background="@drawable/fee_gray_bg" />
 

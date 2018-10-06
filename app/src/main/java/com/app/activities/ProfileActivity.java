@@ -18,12 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.interfaces.IServices;
-import com.app.master.R;
-import com.app.models.StudentDetail;
-import com.app.models.StudentList;
-import com.app.models.StudentLogout;
+import com.app.emp.R;
+import com.app.models.EmployeeDetail;
+import com.app.models.EmployeeList;
+import com.app.models.EmployeeLogout;
 import com.app.network.Services;
-import com.app.network.StudentDataService;
+import com.app.network.EmployeeDataService;
 import com.app.sessions.SessionManager;
 import com.app.utils.ImageHolder;
 import com.app.utils.Util;
@@ -44,10 +44,10 @@ public class ProfileActivity extends BaseActivity {
     private String mStudentId;
     private TextView stdName;
     private TextView fatherName;
-    private TextView motherName;
-    private TextView className;
-    private TextView contactNo;
-    private TextView address;
+    private TextView whatsAppNo;
+    private TextView cnic;
+    private TextView gender;
+    private TextView designation;
     private TextView mHeaderTitle;
     CircleImageView imageView;
     FrameLayout overlay;
@@ -79,10 +79,10 @@ public class ProfileActivity extends BaseActivity {
 
         stdName = (TextView) findViewById(R.id.std_name);
         fatherName = (TextView) findViewById(R.id.father_name);
-        motherName = (TextView) findViewById(R.id.mother_name);
-        className = (TextView) findViewById(R.id.present_class);
-        contactNo = (TextView) findViewById(R.id.contact);
-        address = (TextView) findViewById(R.id.address);
+        whatsAppNo = (TextView) findViewById(R.id.whatsappno);
+        cnic = (TextView) findViewById(R.id.cnic);
+        gender = (TextView) findViewById(R.id.gender);
+        designation = (TextView) findViewById(R.id.designation);
         overlay = (FrameLayout) findViewById(R.id.progressBarHolder);
         imageView = (CircleImageView) findViewById(R.id.iv_logo_profile);
         session = new SessionManager(getApplicationContext());
@@ -178,7 +178,7 @@ public class ProfileActivity extends BaseActivity {
                         if(!session.getValues("RECORDS").equals(""))
                         {
                             Gson gson = new Gson();
-                            StudentList studentList = gson.fromJson(session.getValues("RECORDS"), StudentList.class);
+                            EmployeeList studentList = gson.fromJson(session.getValues("RECORDS"), EmployeeList.class);
                             Intent i =  new Intent();
                             i.setClass(getApplicationContext(), Home2Activity.class);
                             i.putExtra("LIST", studentList);
@@ -198,7 +198,7 @@ public class ProfileActivity extends BaseActivity {
         });
         popup.show();
     }
-    private class AsyncTaskRunner extends AsyncTask<String, String, StudentDetail> {
+    private class AsyncTaskRunner extends AsyncTask<String, String, EmployeeDetail> {
         private Context mContext;
 
         public AsyncTaskRunner (Context context){
@@ -206,22 +206,22 @@ public class ProfileActivity extends BaseActivity {
         }
 
         @Override
-        protected StudentDetail doInBackground(String... params) {
-            StudentDetail stdObj;
-            StudentDataService service = new StudentDataService(getApplication());
-            stdObj = service.getStudentDetail(mStudentId);
+        protected EmployeeDetail doInBackground(String... params) {
+            EmployeeDetail stdObj;
+            EmployeeDataService service = new EmployeeDataService(getApplication());
+            stdObj = service.getEmployeeDetail(mStudentId);
             return stdObj;
         }
         @Override
-        protected void onPostExecute(StudentDetail result) {
+        protected void onPostExecute(EmployeeDetail result) {
             if(result != null)
             {
                 stdName.setText(result.getStudentName());
                 fatherName.setText(result.getFatherName());
-                motherName.setText(result.getMotherName());
-                className.setText(result.getClass_());
-                contactNo.setText(result.getEmergencyContact());
-                address.setText(result.getAddress());
+                whatsAppNo.setText(result.getMotherName());
+                cnic.setText(result.getClass_());
+                gender.setText(result.getEmergencyContact());
+                designation.setText(result.getAddress());
 
             }
             else
@@ -297,7 +297,7 @@ public class ProfileActivity extends BaseActivity {
 
 
     }
-    private class AsyncLogoutTaskRunner extends AsyncTask<String, String, StudentLogout> {
+    private class AsyncLogoutTaskRunner extends AsyncTask<String, String, EmployeeLogout> {
         private Context mContext;
         IServices service;
         public AsyncLogoutTaskRunner (Context context){
@@ -305,9 +305,9 @@ public class ProfileActivity extends BaseActivity {
         }
 
         @Override
-        protected StudentLogout doInBackground(String... params) {
+        protected EmployeeLogout doInBackground(String... params) {
 
-            StudentLogout stdObj;
+            EmployeeLogout stdObj;
             service = new Services(mContext,getApplication());
             OSPermissionSubscriptionState status = OneSignal.getPermissionSubscriptionState();
             String mPlayerId = status.getSubscriptionStatus().getUserId();
@@ -315,7 +315,7 @@ public class ProfileActivity extends BaseActivity {
             return stdObj;
         }
         @Override
-        protected void onPostExecute(StudentLogout result) {
+        protected void onPostExecute(EmployeeLogout result) {
             if(result != null && result.getLogout().equalsIgnoreCase("true"))
             {
                 SessionManager session = new SessionManager(getApplicationContext());

@@ -5,7 +5,6 @@ import android.app.Application;
 import com.app.activities.MyApplication;
 import com.app.interfaces.APIInterface;
 import com.app.models.SchoolProfile;
-import com.app.models.StudentNotification;
 
 import retrofit2.Call;
 import retrofit2.Response;

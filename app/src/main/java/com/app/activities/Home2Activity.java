@@ -28,10 +28,10 @@ import android.widget.Toast;
 
 import com.app.adapters.StudentListAdapter;
 import com.app.interfaces.IServices;
-import com.app.master.R;
-import com.app.models.Student;
-import com.app.models.StudentList;
-import com.app.models.StudentLogout;
+import com.app.emp.R;
+import com.app.models.Employee;
+import com.app.models.EmployeeList;
+import com.app.models.EmployeeLogout;
 import com.app.network.Services;
 import com.app.sessions.SessionManager;
 import com.app.utils.ImageHolder;
@@ -44,7 +44,7 @@ public class Home2Activity extends AppCompatActivity
 
     private IServices service;
     ListView studentList;
-    StudentList list;
+    EmployeeList list;
     SessionManager session = null;
     ImageView mLogoImage, mSideMenuLogo;
     private String mPlayerId;
@@ -130,7 +130,7 @@ public class Home2Activity extends AppCompatActivity
             OneSignal.clearOneSignalNotifications();
             session = new SessionManager(getApplicationContext());
             try {
-                list = (StudentList)getIntent().getExtras().getParcelable("LIST");
+                list = (EmployeeList) getIntent().getExtras().getParcelable("LIST");
                 if(list != null)
                 {
                     StudentListAdapter adapter = new StudentListAdapter(list,this);
@@ -139,7 +139,7 @@ public class Home2Activity extends AppCompatActivity
                     studentList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Student std = list.getStudents().get(position);
+                            Employee std = list.getEmployees().get(position);
                             Intent i =  new Intent();
                             i.setClass(Home2Activity.this, StudentActivity.class);
                             i.putExtra("student_id", std.getStudentId());
@@ -205,14 +205,14 @@ public class Home2Activity extends AppCompatActivity
 
             Intent i =  new Intent();
             i.setClass(this, StudentDetailsActivity.class);
-            i.putExtra("student_id", list.getStudents().get(0).getStudentId());
+            i.putExtra("student_id", list.getEmployees().get(0).getStudentId());
             startActivity(i);
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         } else if (id == R.id.nav_notifications) {
             Intent i =  new Intent();
             i.setClass(this, NotificationActivity.class);
-            i.putExtra("student_id", list.getStudents().get(0).getStudentId());
+            i.putExtra("student_id", list.getEmployees().get(0).getStudentId());
             startActivity(i);
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
@@ -252,11 +252,11 @@ public class Home2Activity extends AppCompatActivity
     public void onClickRightMenu(View item) {
         Intent i =  new Intent();
         i.setClass(this, NotificationActivity.class);
-        i.putExtra("student_id", list.getStudents().get(0).getStudentId());
+        i.putExtra("student_id", list.getEmployees().get(0).getStudentId());
         startActivity(i);
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
-    private class AsyncTaskRunner extends AsyncTask<String, String, StudentLogout> {
+    private class AsyncTaskRunner extends AsyncTask<String, String, EmployeeLogout> {
         private Context mContext;
 
         public AsyncTaskRunner (Context context){
@@ -264,15 +264,15 @@ public class Home2Activity extends AppCompatActivity
         }
 
         @Override
-        protected StudentLogout doInBackground(String... params) {
+        protected EmployeeLogout doInBackground(String... params) {
 
-            StudentLogout stdObj;
+            EmployeeLogout stdObj;
             service = new Services(mContext,getApplication());
             stdObj = service.LogoutStudent(mPlayerId);
             return stdObj;
         }
         @Override
-        protected void onPostExecute(StudentLogout result) {
+        protected void onPostExecute(EmployeeLogout result) {
             if(result != null && result.getLogout().equalsIgnoreCase("true"))
             {
                 session.logoutUser();

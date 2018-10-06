@@ -4,18 +4,16 @@ import android.app.Application;
 import android.content.Context;
 
 import com.app.models.AppRateUrlModel;
+import com.app.models.EmployeeList;
 import com.app.models.SchoolProfile;
-import com.app.models.StudentAttendance;
-import com.app.models.StudentDetail;
+import com.app.models.EmployeeDetail;
 import com.app.models.StudentExam;
 import com.app.models.StudentExamDetail;
 import com.app.models.StudentFee;
 import com.app.models.StudentFeeDetail;
-import com.app.models.StudentList;
-import com.app.models.StudentLogout;
-import com.app.models.StudentNotification;
-import com.app.models._StudentAttendance;
-import com.app.utils.Util;
+import com.app.models.EmployeeLogout;
+import com.app.models.EmployeeNotification;
+import com.app.models._EmployeeAttendance;
 
 public class Services implements com.app.interfaces.IServices{
     Application appObj;
@@ -24,11 +22,11 @@ public class Services implements com.app.interfaces.IServices{
         this.appObj = app;
     }
     @Override
-    public StudentList GetStudentList(String mobileNo, String playerId) {
-        StudentList studentObject;
+    public EmployeeList GetStudentList(String mobileNo, String playerId) {
+        EmployeeList studentObject;
         try {
-            StudentServices stdService = new StudentServices(appObj);
-            studentObject = stdService.getStudents(mobileNo,playerId);
+            EmployeeServices stdService = new EmployeeServices(appObj);
+            studentObject = stdService.getEmployees(mobileNo,playerId);
             return studentObject;
         }
         catch (Exception ex)
@@ -38,11 +36,11 @@ public class Services implements com.app.interfaces.IServices{
     }
 
     @Override
-    public StudentDetail GetStudentDetail(String studentId) {
-        StudentDetail studentObject;
+    public EmployeeDetail GetStudentDetail(String studentId) {
+        EmployeeDetail studentObject;
         try {
-            StudentDataService stdService = new StudentDataService(appObj);
-            studentObject = stdService.getStudentDetail(studentId);
+            EmployeeDataService stdService = new EmployeeDataService(appObj);
+            studentObject = stdService.getEmployeeDetail(studentId);
             return studentObject;
         }
         catch (Exception ex)
@@ -108,11 +106,11 @@ public class Services implements com.app.interfaces.IServices{
     }
 
     @Override
-    public _StudentAttendance GetStudentAttendance(String studentId) {
-        _StudentAttendance studentObject;
+    public _EmployeeAttendance GetStudentAttendance(String studentId) {
+        _EmployeeAttendance studentObject;
         try {
-            StudentAttendanceService stdService = new StudentAttendanceService(appObj);
-            studentObject = stdService.getStudentAttendance(studentId);
+            EmployeeAttendanceService stdService = new EmployeeAttendanceService(appObj);
+            studentObject = stdService.getEmployeeAttendance(studentId);
             return studentObject;
         }
         catch (Exception ex)
@@ -122,11 +120,11 @@ public class Services implements com.app.interfaces.IServices{
     }
 
     @Override
-    public StudentNotification GetStudentNotifications(String studentId) {
-        StudentNotification studentObject;
+    public EmployeeNotification GetStudentNotifications(String studentId) {
+        EmployeeNotification studentObject;
         try {
-            StudentNotificationService stdService = new StudentNotificationService(appObj);
-            studentObject = stdService.getStudentNotification(studentId);
+            EmployeeNotificationService stdService = new EmployeeNotificationService(appObj);
+            studentObject = stdService.getEmployeeNotification(studentId);
             return studentObject;
         }
         catch (Exception ex)
@@ -150,12 +148,12 @@ public class Services implements com.app.interfaces.IServices{
 }
 
     @Override
-    public StudentLogout LogoutStudent(String id) {
-        StudentLogout studentLogout;
+    public EmployeeLogout LogoutStudent(String id) {
+        EmployeeLogout employeeLogout;
         try {
-            StudentLogoutService stdLogoutService = new StudentLogoutService(appObj);
-            studentLogout = stdLogoutService.logoutStudent(id);
-            return studentLogout;
+            EmployeeLogoutService stdLogoutService = new EmployeeLogoutService(appObj);
+            employeeLogout = stdLogoutService.logoutStudent(id);
+            return employeeLogout;
         }
         catch (Exception ex)
         {

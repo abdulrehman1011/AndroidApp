@@ -3,14 +3,14 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.app.master"
+        applicationId "com.app.masterattendance"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 3
-        versionName "3"
+        versionCode 1
+        versionName "1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        setProperty("archivesBaseName", "MASTER")
-        manifestPlaceholders = [onesignal_app_id               : "2ff340fb-ef8b-4353-977b-5e24e355f9fa",
+        setProperty("archivesBaseName", "MASTER Attendance")
+        manifestPlaceholders = [onesignal_app_id               : "96236c61-8d48-464e-aec8-fc77733a5546",
                                 onesignal_google_project_number: "REMOTE"]
     }
     buildTypes {
@@ -20,7 +20,7 @@ android {
             signingConfig getSigningConfig()
             applicationVariants.all { variant ->
                 variant.outputs.all {
-                    outputFileName = "MASTER.apk"
+                    outputFileName = "MASTER Attendance.apk"
                 }
             }
         }

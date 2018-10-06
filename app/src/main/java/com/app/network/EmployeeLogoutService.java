@@ -4,25 +4,23 @@ import android.app.Application;
 
 import com.app.activities.MyApplication;
 import com.app.interfaces.APIInterface;
-import com.app.models.AppRateUrlModel;
-import com.app.models.EmployeeList;
+import com.app.models.EmployeeLogout;
 
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class AppRateUrlService {
+public class EmployeeLogoutService {
     APIInterface apiInterface;
-    EmployeeList result;
-    public AppRateUrlService(Application app)
+    public EmployeeLogoutService(Application app)
     {
         apiInterface = ((MyApplication) app).getApiService();
     }
 
-    public AppRateUrlModel getRateUrl(String id)
+    public EmployeeLogout logoutStudent(String id)
     {
-        Response<AppRateUrlModel> response = null;
+        Response<EmployeeLogout> response = null;
         try {
-            Call<AppRateUrlModel> call = apiInterface.getRateURL(id);
+            Call<EmployeeLogout> call = apiInterface.logoutStudent(id);
             response = call.execute();
         } catch (Exception e) {
             e.printStackTrace();

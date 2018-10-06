@@ -1,17 +1,16 @@
 package com.app.interfaces;
 
 import com.app.models.AppRateUrlModel;
+import com.app.models.EmployeeList;
 import com.app.models.SchoolProfile;
-import com.app.models.StudentAttendance;
-import com.app.models.StudentDetail;
+import com.app.models.EmployeeDetail;
 import com.app.models.StudentExam;
 import com.app.models.StudentExamDetail;
 import com.app.models.StudentFee;
 import com.app.models.StudentFeeDetail;
-import com.app.models.StudentList;
-import com.app.models.StudentLogout;
-import com.app.models.StudentNotification;
-import com.app.models._StudentAttendance;
+import com.app.models.EmployeeLogout;
+import com.app.models.EmployeeNotification;
+import com.app.models._EmployeeAttendance;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -23,16 +22,16 @@ public interface APIInterface {
 
 
     @GET("/api/login?")
-    Call<StudentList> getStudentList(@Query("mobile_number") String mobile_number,@Query("token") String token);
+    Call<EmployeeList> getStudentList(@Query("emp_number") String emp_number, @Query("token") String token);
 
     @GET("/api/login?")
-    Call<StudentLogout> logoutStudent(@Query("logout") String token);
+    Call<EmployeeLogout> logoutStudent(@Query("emp_logout") String token);
 
-    @GET("/api/student?")
-    Call<StudentDetail> getStudentDetail(@Query("student_id") String student_id);
+    @GET("/api/employee?")
+    Call<EmployeeDetail> getStudentDetail(@Query("employee_id") String employee_id);
 
     @GET("/api/attendance?")
-    Call<_StudentAttendance> getStudentAttendance(@Query("student_id") String student_id);
+    Call<_EmployeeAttendance> getStudentAttendance(@Query("emp_id") String emp_id);
 
     @GET("/api/exams?")
     Call<StudentExam> getStudentExamInfo(@Query("student_id") String student_id);
@@ -46,14 +45,14 @@ public interface APIInterface {
     @GET("/api/fee?")
     Call<StudentFeeDetail> getStudentFeeDetail(@Query("student_id") String student_id,@Query("fee_month") String fee_month);
 
-    @GET("/api/Student?")
-    Call<SchoolProfile> getSchoolProfile(@Query("std_id") String std_id);
+    @GET("/api/Employee?")
+    Call<SchoolProfile> getSchoolProfile(@Query("emp_id") String emp_id);
 
     @GET("/api/Notification?")
-    Call<StudentNotification> getStudentNotifications(@Query("student_id") String student_id);
+    Call<EmployeeNotification> getStudentNotifications(@Query("emp_id") String emp_id);
 
-    @GET("/api/student?")
-    Call<AppRateUrlModel> getRateURL(@Query("rate_url") String id);
+    @GET("/api/Employee?")
+    Call<AppRateUrlModel> getRateURL(@Query("rate_url") String rate_url);
 
     @GET("/api/Fee?")
     @Streaming
