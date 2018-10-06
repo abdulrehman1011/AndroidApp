@@ -13,7 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.app.interfaces.InternetConnectionListener;
-import com.app.lyceum.american.americanlyceumapp.R;
+import com.app.oigs.R;
 import com.app.utils.ImageHolder;
 
 public class BaseActivity extends Activity implements InternetConnectionListener {

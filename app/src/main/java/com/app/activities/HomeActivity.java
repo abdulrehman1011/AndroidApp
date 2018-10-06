@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.adapters.StudentListAdapter;
-import com.app.lyceum.american.americanlyceumapp.R;
+import com.app.oigs.R;
 import com.app.models.Student;
 import com.app.models.StudentList;
 import com.app.sessions.SessionManager;

@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 
-import com.app.lyceum.american.americanlyceumapp.R;
+import com.app.oigs.R;
 import com.app.models.FeeMonth;
 import com.app.models.Student;
 import com.app.models.StudentFee;

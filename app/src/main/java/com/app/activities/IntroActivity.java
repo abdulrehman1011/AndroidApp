@@ -32,7 +32,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.app.interfaces.InternetConnectionListener;
-import com.app.lyceum.american.americanlyceumapp.R;
+import com.app.oigs.R;
 import com.app.models.StudentList;
 import com.app.network.Services;
 import com.app.sessions.SessionManager;

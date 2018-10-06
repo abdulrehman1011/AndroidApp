@@ -12,6 +12,7 @@ import com.app.models.StudentExamDetail;
 import com.app.models.StudentFee;
 import com.app.models.StudentFeeDetail;
 import com.app.models.StudentList;
+import com.app.models.StudentLogout;
 import com.app.models.StudentNotification;
 import com.app.models._StudentAttendance;
 import com.app.utils.Util;
@@ -149,6 +150,19 @@ public class Services implements com.app.interfaces.IServices{
 }
 
     @Override
+    public StudentLogout LogoutStudent(String id) {
+        StudentLogout studentLogout;
+        try {
+            StudentLogoutService stdLogoutService = new StudentLogoutService(appObj);
+            studentLogout = stdLogoutService.logoutStudent(id);
+            return studentLogout;
+        }
+        catch (Exception ex)
+        {
+        }
+        return null;
+    }
+    @Override
     public AppRateUrlModel GetAppRateURL(String id) {
         try {
             AppRateUrlService appRateUrlService = new AppRateUrlService(appObj);
@@ -160,4 +174,6 @@ public class Services implements com.app.interfaces.IServices{
         }
         return null;
     }
+
+
 }

@@ -3,14 +3,14 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.app.lyceum.american.americanlyceumapp"
+        applicationId "com.app.oigs"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 6
-        versionName "1.1.6"
+        versionCode 7
+        versionName "7"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         setProperty("archivesBaseName", "OIGS")
-        manifestPlaceholders = [onesignal_app_id               : "2ff340fb-ef8b-4353-977b-5e24e355f9fa",
+        manifestPlaceholders = [onesignal_app_id               : "ac88698b-d73e-438d-91b3-848e92674105",
                                 onesignal_google_project_number: "REMOTE"]
     }
     buildTypes {

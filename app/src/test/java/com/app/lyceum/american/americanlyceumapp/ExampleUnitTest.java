@@ -1,4 +1,4 @@
-package com.app.lyceum.american.americanlyceumapp;
+package com.app.oigs;
 
 import org.junit.Test;
 

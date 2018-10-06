@@ -6,7 +6,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.app.activities.MyApplication;
-import com.app.lyceum.american.americanlyceumapp.R;
+import com.app.oigs.R;
 import com.onesignal.NotificationExtenderService;
 import com.onesignal.OSNotificationDisplayedResult;
 import com.onesignal.OSNotificationReceivedResult;

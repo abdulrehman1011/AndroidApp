@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.app.lyceum.american.americanlyceumapp.R;
+import com.app.oigs.R;
 import com.app.models.ExamResult;
 import com.app.models.StudentExamDetail;
 

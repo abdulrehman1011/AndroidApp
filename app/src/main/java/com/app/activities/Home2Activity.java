@@ -2,6 +2,7 @@ package com.app.activities;
 
 import android.app.ActionBar;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
@@ -11,6 +12,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -33,11 +35,15 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.app.adapters.StudentListAdapter;
-import com.app.lyceum.american.americanlyceumapp.R;
+import com.app.interfaces.IServices;
+import com.app.oigs.R;
 import com.app.models.Student;
 import com.app.models.StudentList;
+import com.app.models.StudentLogout;
+import com.app.network.Services;
 import com.app.sessions.SessionManager;
 import com.app.utils.ImageHolder;
+import com.onesignal.OSPermissionSubscriptionState;
 import com.onesignal.OneSignal;
 import com.squareup.picasso.Picasso;
 
@@ -46,10 +52,12 @@ import java.util.HashMap;
 public class Home2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private IServices service;
     ListView studentList;
     StudentList list;
     SessionManager session = null;
     ImageView mLogoImage, mSideMenuLogo;
+    private String mPlayerId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +86,8 @@ public class Home2Activity extends AppCompatActivity
             toolbar.setNavigationIcon(R.drawable.menu_icon);
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_home);
             navigationView.setNavigationItemSelectedListener(this);
-
+            OSPermissionSubscriptionState status = OneSignal.getPermissionSubscriptionState();
+            mPlayerId = status.getSubscriptionStatus().getUserId();
 
             navigationView.setItemIconTintList(null);
             //Text color
@@ -241,13 +250,8 @@ public class Home2Activity extends AppCompatActivity
 
 
         } else if (id == R.id.nav_logout) {
-            session.logoutUser();
-            Intent i = new Intent(this, LoginActivity.class);
-            // set the new task and clear flags
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            finish();
-            startActivity(i);
-            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+            AsyncTaskRunner runner = new AsyncTaskRunner(this);
+            runner.execute();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -260,5 +264,49 @@ public class Home2Activity extends AppCompatActivity
         i.putExtra("student_id", list.getStudents().get(0).getStudentId());
         startActivity(i);
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    }
+    private class AsyncTaskRunner extends AsyncTask<String, String, StudentLogout> {
+        private Context mContext;
+
+        public AsyncTaskRunner (Context context){
+            mContext = context;
+        }
+
+        @Override
+        protected StudentLogout doInBackground(String... params) {
+
+            StudentLogout stdObj;
+            service = new Services(mContext,getApplication());
+            stdObj = service.LogoutStudent(mPlayerId);
+            return stdObj;
+        }
+        @Override
+        protected void onPostExecute(StudentLogout result) {
+            if(result != null && result.getLogout().equalsIgnoreCase("true"))
+            {
+                session.logoutUser();
+                Intent i = new Intent(Home2Activity.this, LoginActivity.class);
+                // set the new task and clear flags
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                finish();
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+            }
+            else
+            {
+                Toast.makeText(mContext,"Logout Failed",Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+
+        @Override
+        protected void onProgressUpdate(String... text) {
+
+        }
     }
 }

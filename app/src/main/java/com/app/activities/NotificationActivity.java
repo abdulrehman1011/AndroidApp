@@ -19,16 +19,21 @@ import android.widget.Toast;
 
 import com.app.adapters.StudentFeeAdapter;
 import com.app.adapters.StudentNotificationAdapter;
-import com.app.lyceum.american.americanlyceumapp.R;
+import com.app.interfaces.IServices;
+import com.app.oigs.R;
 import com.app.models.Notify;
 import com.app.models.StudentFee;
 import com.app.models.StudentList;
+import com.app.models.StudentLogout;
 import com.app.models.StudentNotification;
+import com.app.network.Services;
 import com.app.network.StudentFeeService;
 import com.app.network.StudentNotificationService;
 import com.app.sessions.SessionManager;
 import com.app.utils.ImageHolder;
 import com.google.gson.Gson;
+import com.onesignal.OSPermissionSubscriptionState;
+import com.onesignal.OneSignal;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -145,12 +150,8 @@ public class NotificationActivity extends BaseActivity {
                         break;
                     case R.id.cmLogout:
 
-                        session.logoutUser();
-                        Intent i = new Intent(getApplicationContext(), IntroActivity.class);
-                        // set the new task and clear flags
-                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(i);
-                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                        AsyncLogoutTaskRunner runner = new AsyncLogoutTaskRunner(NotificationActivity.this);
+                        runner.execute();
                         break;
                 }
                 return false;
@@ -188,6 +189,53 @@ public class NotificationActivity extends BaseActivity {
             overlay.setVisibility(View.GONE);
         }
 
+
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+
+        @Override
+        protected void onProgressUpdate(String... text) {
+
+        }
+    }
+    private class AsyncLogoutTaskRunner extends AsyncTask<String, String, StudentLogout> {
+        private Context mContext;
+        IServices service;
+        public AsyncLogoutTaskRunner (Context context){
+            mContext = context;
+        }
+
+        @Override
+        protected StudentLogout doInBackground(String... params) {
+
+            StudentLogout stdObj;
+            service = new Services(mContext,getApplication());
+            OSPermissionSubscriptionState status = OneSignal.getPermissionSubscriptionState();
+            String mPlayerId = status.getSubscriptionStatus().getUserId();
+            stdObj = service.LogoutStudent(mPlayerId);
+            return stdObj;
+        }
+        @Override
+        protected void onPostExecute(StudentLogout result) {
+            if(result != null && result.getLogout().equalsIgnoreCase("true"))
+            {
+                SessionManager session = new SessionManager(getApplicationContext());
+                session.logoutUser();
+                Intent i = new Intent(NotificationActivity.this, LoginActivity.class);
+                // set the new task and clear flags
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                finish();
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+            }
+            else
+            {
+                Toast.makeText(mContext,"Logout Failed",Toast.LENGTH_SHORT).show();
+            }
+        }
 
         @Override
         protected void onPreExecute() {
