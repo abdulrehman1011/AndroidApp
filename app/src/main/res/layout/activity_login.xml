@@ -15,9 +15,9 @@
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@id/include"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/logo_margin_top"
+        android:layout_marginTop="@dimen/logo_margin_top_list"
         android:src="@drawable/logo" />
 
     <LinearLayout

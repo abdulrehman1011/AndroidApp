@@ -78,6 +78,13 @@ public class LoginActivity extends BaseActivity {
             Toast.makeText(this, "Plese enter your number !", Toast.LENGTH_LONG).show();
             return;
         }
+        if(mPlayerId.toString().trim().equals(""))
+        {
+            OSPermissionSubscriptionState status = OneSignal.getPermissionSubscriptionState();
+            mPlayerId = status.getSubscriptionStatus().getUserId();
+            Toast.makeText(this, "Plese wait device getting register !", Toast.LENGTH_LONG).show();
+            return;
+        }
         overlay.setVisibility(View.VISIBLE);
         AsyncTaskRunner runner = new AsyncTaskRunner(this);
         runner.execute();
@@ -161,7 +168,7 @@ public class LoginActivity extends BaseActivity {
                 session.addValues("USERID",mUserMobileNo.getText().toString().trim());
 
                 Intent i =  new Intent();
-                i.setClass(mContext, AttendanceActivity.class);
+                i.setClass(mContext, Home2Activity.class);
                 i.putExtra("LIST", stdObj);
                 //i.putExtra("student_id", result.getStudents().get(0).student_id);
                 finish();
