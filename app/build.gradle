@@ -10,7 +10,7 @@ android {
         versionName "3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         setProperty("archivesBaseName", "MASTER")
-        manifestPlaceholders = [onesignal_app_id               : "2ff340fb-ef8b-4353-977b-5e24e355f9fa",
+        manifestPlaceholders = [onesignal_app_id               : "ccd425cf-0c4d-4115-bcff-9368d7622430",
                                 onesignal_google_project_number: "REMOTE"]
     }
     buildTypes {
